@@ -184,6 +184,7 @@
     </style>
 </head>
 <body class="bg-background text-on-surface antialiased min-h-screen flex flex-col relative selection:bg-secondary selection:text-primary-container">
+<canvas id="comet-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;"></canvas>
 <!-- Mobile Header -->
 <nav class="md:hidden fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30 flex justify-between items-center px-6 py-4">
   <a class="text-on-surface-variant hover:text-secondary transition-colors" href="/stitch_vantis_lateral_fire_experience/vantis_luxury_collections/code.html">
@@ -553,4 +554,54 @@
   </a>
 </nav>
 <script>(function(){try{var c=JSON.parse(localStorage.getItem('vantis_cart'))||[];var n=c.reduce(function(s,i){return s+i.quantity;},0);if(n>0)document.querySelectorAll('.cart-badge').forEach(function(b){b.textContent=n>9?'9+':n;b.style.display='flex';});}catch(e){}})();</script>
+<script>
+(function() {
+    var cc = document.getElementById('comet-canvas');
+    if (!cc) return;
+    var cx = cc.getContext('2d');
+    var cw = 0, ch = 0;
+    function resize() { cw = cc.width = window.innerWidth; ch = cc.height = window.innerHeight; }
+    window.addEventListener('resize', resize, { passive: true });
+    resize();
+
+    function Comet(init) { this.reset(init); }
+    Comet.prototype.reset = function(init) {
+        this.x = Math.random() * cw;
+        this.y = init ? Math.random() * ch * 1.5 - ch * 0.5 : -Math.random() * 40 - 10;
+        this.vy = Math.random() * 2.5 + 1.2;
+        this.vx = (Math.random() - 0.5) * 0.6;
+        this.len = Math.random() * 90 + 40;
+        this.lw = Math.random() * 1.0 + 0.2;
+        this.alpha = Math.random() * 0.45 + 0.15;
+    };
+    Comet.prototype.update = function() {
+        this.y += this.vy; this.x += this.vx;
+        if (this.y - this.len > ch) this.reset(false);
+    };
+    Comet.prototype.draw = function() {
+        var ratio = this.len / this.vy;
+        var tx = this.x - this.vx * ratio;
+        var ty = this.y - this.len;
+        var g = cx.createLinearGradient(this.x, this.y, tx, ty);
+        g.addColorStop(0, 'rgba(233,195,73,' + this.alpha + ')');
+        g.addColorStop(0.5, 'rgba(233,195,73,' + (this.alpha * 0.2) + ')');
+        g.addColorStop(1, 'rgba(233,195,73,0)');
+        cx.beginPath(); cx.moveTo(this.x, this.y); cx.lineTo(tx, ty);
+        cx.strokeStyle = g; cx.lineWidth = this.lw; cx.stroke();
+        cx.beginPath(); cx.arc(this.x, this.y, this.lw + 0.5, 0, Math.PI * 2);
+        cx.fillStyle = 'rgba(255,225,90,' + Math.min(this.alpha * 1.3, 1) + ')';
+        cx.shadowBlur = 8; cx.shadowColor = '#e9c349'; cx.fill(); cx.shadowBlur = 0;
+    };
+
+    var comets = [];
+    for (var i = 0; i < 22; i++) comets.push(new Comet(true));
+
+    function loop() {
+        cx.clearRect(0, 0, cw, ch);
+        for (var i = 0; i < comets.length; i++) { comets[i].update(); comets[i].draw(); }
+        requestAnimationFrame(loop);
+    }
+    loop();
+})();
+</script>
 </body></html>
