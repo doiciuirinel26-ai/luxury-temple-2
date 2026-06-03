@@ -148,6 +148,14 @@
     </style>
 </head>
 <body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- Mobile Header -->
+<nav class="md:hidden fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30 flex justify-between items-center px-6 py-4">
+  <a class="text-on-surface-variant hover:text-secondary transition-colors" href="/">
+    <span class="material-symbols-outlined">arrow_back</span>
+  </a>
+  <span class="text-secondary tracking-[0.2em] uppercase" style="font-family:'Playfair Display',serif;font-size:20px;font-weight:400">VANTIS</span>
+  <span class="material-symbols-outlined text-on-surface-variant">shopping_bag</span>
+</nav>
 <!-- Top Navigation (Web) -->
 <nav class="hidden md:flex fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 flex justify-between items-center px-margin-desktop py-6 transition-opacity duration-700 ease-in-out">
 <div class="flex items-center gap-6">
@@ -165,27 +173,8 @@
 <span class="material-symbols-outlined text-on-surface hover:text-secondary transition-all duration-300 cursor-pointer">person</span>
 </div>
 </nav>
-<!-- Side Navigation (Mobile) - Representing main destinations -->
-<nav class="md:hidden fixed left-0 h-screen w-20 bg-surface-container-lowest dark:bg-surface-container-lowest border-r border-secondary/10 flex flex-col justify-between py-8 z-50 shadow-[5px_0px_30px_rgba(233,195,73,0.05)]">
-<div class="flex flex-col items-center gap-8">
-<div class="font-headline-xl-mobile text-headline-xl-mobile text-secondary rotate-90 whitespace-nowrap mb-8 tracking-widest uppercase">VANTIS</div>
-<a class="flex flex-col items-center gap-2 text-secondary p-4 bg-secondary/5 border-r-2 border-secondary w-full group" href="/stitch_vantis_lateral_fire_experience/vantis_3d_watches_collection/code.html">
-<span class="material-symbols-outlined group-hover:scale-110 transition-transform">watch</span>
-</a>
-<a class="flex flex-col items-center gap-2 text-on-surface-variant hover:text-secondary p-4 w-full group hover:bg-surface-container-high transition-all" href="/stitch_vantis_lateral_fire_experience/vantis_3d_perfumes_collection/code.html">
-<span class="material-symbols-outlined group-hover:scale-110 transition-transform">water_drop</span>
-</a>
-<a class="flex flex-col items-center gap-2 text-on-surface-variant hover:text-secondary p-4 w-full group hover:bg-surface-container-high transition-all" href="/stitch_vantis_lateral_fire_experience/vantis_3d_jewelry_collection_infinite/code.html">
-<span class="material-symbols-outlined group-hover:scale-110 transition-transform">diamond</span>
-</a>
-</div>
-<div class="flex flex-col items-center gap-6">
-<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer">settings</span>
-<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer">contact_support</span>
-</div>
-</nav>
 <!-- Main Canvas -->
-<main class="flex-grow flex items-center justify-center pt-24 md:pt-0 relative overflow-hidden pl-0 md:pl-0 pl-20" id="main-content">
+<main class="flex-grow flex items-center justify-center pt-20 md:pt-0 relative overflow-hidden" id="main-content">
 <!-- Ambient Background -->
 <div class="absolute inset-0 bg-gradient-to-b from-primary-container via-background to-surface-container-lowest z-0 pointer-events-none"></div>
 <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px] mix-blend-screen pointer-events-none"></div>
@@ -344,4 +333,23 @@
             });
         });
     </script>
+<!-- Mobile Bottom Navigation -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest border-t border-secondary/10 flex justify-around items-center py-3">
+  <a href="/" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-secondary transition-colors px-4">
+    <span class="material-symbols-outlined" style="font-size:22px">home</span>
+    <span style="font-size:9px;letter-spacing:0.1em;font-weight:600;text-transform:uppercase">Home</span>
+  </a>
+  <a href="/stitch_vantis_lateral_fire_experience/vantis_3d_watches_collection/code.html" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-secondary transition-colors px-4">
+    <span class="material-symbols-outlined" style="font-size:22px">watch</span>
+    <span style="font-size:9px;letter-spacing:0.1em;font-weight:600;text-transform:uppercase">Watches</span>
+  </a>
+  <a href="/stitch_vantis_lateral_fire_experience/vantis_3d_perfumes_collection/code.html" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-secondary transition-colors px-4">
+    <span class="material-symbols-outlined" style="font-size:22px">water_drop</span>
+    <span style="font-size:9px;letter-spacing:0.1em;font-weight:600;text-transform:uppercase">Perfumes</span>
+  </a>
+  <a href="/stitch_vantis_lateral_fire_experience/vantis_3d_jewelry_collection_infinite/code.html" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-secondary transition-colors px-4">
+    <span class="material-symbols-outlined" style="font-size:22px">diamond</span>
+    <span style="font-size:9px;letter-spacing:0.1em;font-weight:600;text-transform:uppercase">Jewelry</span>
+  </a>
+</nav>
 </body></html>

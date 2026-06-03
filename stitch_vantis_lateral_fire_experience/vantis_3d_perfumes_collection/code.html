@@ -184,6 +184,14 @@
     </style>
 </head>
 <body class="bg-background text-on-surface antialiased min-h-screen flex flex-col relative selection:bg-secondary selection:text-primary-container">
+<!-- Mobile Header -->
+<nav class="md:hidden fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30 flex justify-between items-center px-6 py-4">
+  <a class="text-on-surface-variant hover:text-secondary transition-colors" href="/stitch_vantis_lateral_fire_experience/vantis_luxury_collections/code.html">
+    <span class="material-symbols-outlined">arrow_back</span>
+  </a>
+  <a class="font-headline-md text-secondary tracking-[0.2em] uppercase" href="/" style="font-family:'Playfair Display',serif;font-size:20px">VANTIS</a>
+  <span class="material-symbols-outlined text-on-surface-variant">shopping_bag</span>
+</nav>
 <!-- TopNavBar (Shared Component) -->
 <header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 transition-opacity duration-700 ease-in-out">
 <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-6">
@@ -253,7 +261,7 @@
 </div>
 </aside>
 <!-- Main Content Canvas -->
-<main class="flex-grow pt-32 pb-24 md:ml-20 flex flex-col relative overflow-hidden min-h-screen">
+<main class="flex-grow pt-20 md:pt-32 pb-24 md:ml-20 flex flex-col relative overflow-hidden min-h-screen">
 <!-- Back Button -->
 <div class="absolute top-32 left-8 md:left-12 z-20">
 <a class="group flex items-center gap-2 text-on-surface-variant hover:text-secondary transition-colors duration-300" href="/stitch_vantis_lateral_fire_experience/vantis_luxury_collections/code.html">
@@ -505,6 +513,21 @@
             // Initialize carousel
             updateCarousel();
 
+            // Touch swipe support
+            let touchStartX = 0;
+            const carouselEl = document.querySelector('.carousel-3d-container');
+            if (carouselEl) {
+                carouselEl.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+                carouselEl.addEventListener('touchend', e => {
+                    const diff = e.changedTouches[0].screenX - touchStartX;
+                    if (Math.abs(diff) > 50) {
+                        activeIndex = diff < 0 ? (activeIndex + 1) % items.length : (activeIndex - 1 + items.length) % items.length;
+                        updateCarousel();
+                        setTimeout(() => triggerExplosion(items[activeIndex]), 300);
+                    }
+                }, { passive: true });
+            }
+
             // Trigger initial explosion
             setTimeout(() => {
                 triggerExplosion(items[activeIndex]);
@@ -512,4 +535,23 @@
         });
 
     </script>
+<!-- Mobile Bottom Navigation -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest border-t border-secondary/10 flex justify-around items-center py-3">
+  <a href="/" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-secondary transition-colors px-4">
+    <span class="material-symbols-outlined" style="font-size:22px">home</span>
+    <span style="font-size:9px;letter-spacing:0.1em;font-weight:600;text-transform:uppercase">Home</span>
+  </a>
+  <a href="/stitch_vantis_lateral_fire_experience/vantis_3d_watches_collection/code.html" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-secondary transition-colors px-4">
+    <span class="material-symbols-outlined" style="font-size:22px">watch</span>
+    <span style="font-size:9px;letter-spacing:0.1em;font-weight:600;text-transform:uppercase">Watches</span>
+  </a>
+  <a href="/stitch_vantis_lateral_fire_experience/vantis_3d_perfumes_collection/code.html" class="flex flex-col items-center gap-1 text-secondary hover:text-secondary transition-colors px-4">
+    <span class="material-symbols-outlined" style="font-size:22px">water_drop</span>
+    <span style="font-size:9px;letter-spacing:0.1em;font-weight:600;text-transform:uppercase">Perfumes</span>
+  </a>
+  <a href="/stitch_vantis_lateral_fire_experience/vantis_3d_jewelry_collection_infinite/code.html" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-secondary transition-colors px-4">
+    <span class="material-symbols-outlined" style="font-size:22px">diamond</span>
+    <span style="font-size:9px;letter-spacing:0.1em;font-weight:600;text-transform:uppercase">Jewelry</span>
+  </a>
+</nav>
 </body></html>

@@ -175,10 +175,12 @@
 </header>
 
 <!-- Mobile Nav Header -->
-<nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30 md:hidden flex justify-between items-center px-margin-mobile py-4">
-    <span class="material-symbols-outlined text-on-surface">menu</span>
-    <div class="font-headline-xl-mobile text-headline-xl-mobile text-secondary tracking-[0.2em] uppercase">VANTIS</div>
-    <span class="material-symbols-outlined text-on-surface">shopping_bag</span>
+<nav class="md:hidden fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30 flex justify-between items-center px-6 py-4">
+  <a class="text-on-surface-variant hover:text-secondary transition-colors" id="mobile-back-btn" href="/">
+    <span class="material-symbols-outlined">arrow_back</span>
+  </a>
+  <span class="text-secondary tracking-[0.2em] uppercase" style="font-family:'Playfair Display',serif;font-size:20px;font-weight:400">VANTIS</span>
+  <span class="material-symbols-outlined text-on-surface-variant">shopping_bag</span>
 </nav>
 
 <!-- SideNavBar -->
@@ -226,7 +228,7 @@
 </aside>
 
 <!-- Main Content -->
-<main class="flex-grow pt-[88px] md:pt-[100px] pb-24 md:ml-20">
+<main class="flex-grow pt-20 md:pt-[100px] pb-24 md:ml-20">
     <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 
         <!-- Back Button -->
@@ -249,7 +251,7 @@
             </div>
 
             <!-- Right: Product Details -->
-            <div class="col-span-1 md:col-span-5 flex flex-col justify-start h-full pl-0 md:pl-8 mt-6 md:mt-0 pt-0 md:pt-4">
+            <div class="col-span-1 md:col-span-5 flex flex-col justify-start h-full px-4 md:px-0 md:pl-8 mt-6 md:mt-0 pt-0 md:pt-4">
 
                 <!-- Category Label -->
                 <div class="flex items-center gap-2 mb-4">
@@ -497,6 +499,10 @@
 
         const product = PRODUCTS[id];
 
+        // Set mobile back button
+        const mobileBackBtn = document.getElementById('mobile-back-btn');
+        if (mobileBackBtn && product) mobileBackBtn.href = product.categoryUrl;
+
         // Set page title
         document.title = 'VANTIS — ' + product.name;
 
@@ -549,4 +555,23 @@
         }
     });
 </script>
+<!-- Mobile Bottom Navigation -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest border-t border-secondary/10 flex justify-around items-center py-3">
+  <a href="/" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-secondary transition-colors px-4">
+    <span class="material-symbols-outlined" style="font-size:22px">home</span>
+    <span style="font-size:9px;letter-spacing:0.1em;font-weight:600;text-transform:uppercase">Home</span>
+  </a>
+  <a href="/stitch_vantis_lateral_fire_experience/vantis_3d_watches_collection/code.html" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-secondary transition-colors px-4">
+    <span class="material-symbols-outlined" style="font-size:22px">watch</span>
+    <span style="font-size:9px;letter-spacing:0.1em;font-weight:600;text-transform:uppercase">Watches</span>
+  </a>
+  <a href="/stitch_vantis_lateral_fire_experience/vantis_3d_perfumes_collection/code.html" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-secondary transition-colors px-4">
+    <span class="material-symbols-outlined" style="font-size:22px">water_drop</span>
+    <span style="font-size:9px;letter-spacing:0.1em;font-weight:600;text-transform:uppercase">Perfumes</span>
+  </a>
+  <a href="/stitch_vantis_lateral_fire_experience/vantis_3d_jewelry_collection_infinite/code.html" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-secondary transition-colors px-4">
+    <span class="material-symbols-outlined" style="font-size:22px">diamond</span>
+    <span style="font-size:9px;letter-spacing:0.1em;font-weight:600;text-transform:uppercase">Jewelry</span>
+  </a>
+</nav>
 </body></html>
