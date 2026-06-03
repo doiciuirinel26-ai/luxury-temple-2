@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VANTIS — Product</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "secondary": "#e9c349",
+                    "surface-container-high": "#282a2b",
+                    "surface-container": "#1e2020",
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "primary-container": "#0a0a0a",
+                    "on-primary-fixed": "#1c1b1b",
+                    "inverse-surface": "#e2e2e2",
+                    "outline": "#8e9192",
+                    "surface": "#121414",
+                    "on-surface": "#e2e2e2",
+                    "primary": "#c9c6c5",
+                    "on-primary-container": "#7b7979",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "error-container": "#93000a",
+                    "secondary-container": "#af8d11",
+                    "surface-bright": "#37393a",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-error": "#690005",
+                    "surface-tint": "#c9c6c5",
+                    "background": "#121414",
+                    "secondary-fixed": "#ffe088",
+                    "on-primary-fixed-variant": "#474646",
+                    "on-surface-variant": "#c4c7c7",
+                    "on-secondary": "#3c2f00",
+                    "tertiary": "#c8c6c5",
+                    "on-primary": "#313030",
+                    "outline-variant": "#444748",
+                    "on-tertiary": "#313030",
+                    "on-secondary-fixed": "#241a00",
+                    "surface-variant": "#333535",
+                    "on-secondary-container": "#342800",
+                    "inverse-on-surface": "#2f3131",
+                    "surface-container-highest": "#333535",
+                    "surface-dim": "#121414",
+                    "error": "#ffb4ab",
+                    "tertiary-container": "#0a0a0a",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#474746",
+                    "on-background": "#e2e2e2",
+                    "surface-container-lowest": "#0c0f0f",
+                    "primary-fixed-dim": "#c9c6c5",
+                    "on-tertiary-container": "#7a7979",
+                    "tertiary-fixed": "#e5e2e1",
+                    "surface-container-low": "#1a1c1c",
+                    "inverse-primary": "#5f5e5e",
+                    "primary-fixed": "#e5e2e1",
+                    "secondary-fixed-dim": "#e9c349"
+                },
+                "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+                },
+                "spacing": {
+                    "margin-desktop": "80px",
+                    "gutter": "32px",
+                    "margin-mobile": "24px",
+                    "unit": "8px",
+                    "container-max": "1440px"
+                },
+                "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Playfair Display"],
+                    "headline-xl-mobile": ["Playfair Display"],
+                    "headline-xl": ["Playfair Display"],
+                    "label-caps": ["Inter"],
+                    "display-lg": ["Playfair Display"],
+                    "display-lg-mobile": ["Playfair Display"]
+                },
+                "fontSize": {
+                    "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "300" }],
+                    "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                    "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                    "headline-xl-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                    "headline-xl": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                    "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600" }],
+                    "display-lg": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                    "display-lg-mobile": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "400" }]
+                }
+            }
+        }
+    }
+</script>
+<style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+    .icon-fill {
+        font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* Lateral Fire Swipe Transition */
+    .swipe-transition {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(90deg, #0a0a0a 0%, #1a1a1a 50%, #af8d11 95%, #e9c349 100%);
+        z-index: 9999;
+        transform-origin: right;
+        animation: swipeOut 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    }
+
+    @keyframes swipeOut {
+        0% { transform: scaleX(1); }
+        100% { transform: scaleX(0); }
+    }
+
+    .glow-hover:hover {
+        box-shadow: 0 0 15px rgba(233, 195, 73, 0.15);
+        border-color: #e9c349;
+    }
+
+    .img-desaturate {
+        filter: grayscale(80%);
+        transition: filter 0.7s ease;
+    }
+    .img-desaturate:hover {
+        filter: grayscale(0%);
+    }
+
+    .nav-glow:hover {
+        text-shadow: 0 0 15px rgba(233, 195, 73, 0.4);
+    }
+</style>
+</head>
+<body class="bg-primary-container text-on-background antialiased overflow-x-hidden selection:bg-secondary selection:text-primary-container min-h-screen flex flex-col">
+
+<!-- Transition Overlay -->
+<div class="swipe-transition"></div>
+
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 transition-opacity duration-700 ease-in-out">
+    <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-6">
+        <!-- Navigation Links (Hidden on mobile) -->
+        <nav class="hidden md:flex gap-8">
+            <a class="font-body-md text-body-md tracking-widest text-secondary border-b border-secondary pb-1 nav-glow" href="/stitch_vantis_lateral_fire_experience/vantis_luxury_collections/code.html">Collections</a>
+            <a class="font-body-md text-body-md tracking-widest text-on-surface hover:text-secondary transition-colors duration-500 nav-glow" href="#">Bespoke</a>
+            <a class="font-body-md text-body-md tracking-widest text-on-surface hover:text-secondary transition-colors duration-500 nav-glow" href="#">Heritage</a>
+            <a class="font-body-md text-body-md tracking-widest text-on-surface hover:text-secondary transition-colors duration-500 nav-glow" href="#">Concierge</a>
+        </nav>
+        <!-- Brand Logo -->
+        <a class="font-headline-md text-headline-md text-secondary tracking-[0.2em] uppercase absolute left-1/2 transform -translate-x-1/2" href="/">
+            VANTIS
+        </a>
+        <!-- Trailing Icons -->
+        <div class="flex gap-4">
+            <button class="text-on-surface hover:text-secondary transition-all duration-300">
+                <span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+            </button>
+            <button class="text-on-surface hover:text-secondary transition-all duration-300">
+                <span class="material-symbols-outlined" data-icon="person">person</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Nav Header -->
+<nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30 md:hidden flex justify-between items-center px-margin-mobile py-4">
+    <span class="material-symbols-outlined text-on-surface">menu</span>
+    <div class="font-headline-xl-mobile text-headline-xl-mobile text-secondary tracking-[0.2em] uppercase">VANTIS</div>
+    <span class="material-symbols-outlined text-on-surface">shopping_bag</span>
+</nav>
+
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-full py-8 justify-between fixed left-0 top-0 h-screen w-20 hover:w-64 transition-all duration-500 z-40 bg-surface-container-lowest dark:bg-surface-container-lowest border-r border-secondary/10 shadow-[5px_0px_30px_rgba(233,195,73,0.05)] group pt-24 overflow-hidden">
+    <div class="flex flex-col gap-8 w-full px-4">
+        <div class="flex items-center gap-4 text-on-surface-variant group-hover:text-on-surface transition-colors">
+            <div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden flex-shrink-0 border border-secondary/20">
+                <img alt="Vantis Private Member" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtyBCInUiusMLaYJXYKyb_qat6_z-e3wEbjZR2suvt8awE9dFQv4QiJ4_QgwOB5a2rVaiJznMofKCqm-_MFy_ESrKe-l0wb7HichDuKTi_U5VY3o1f4eNAAXF6A2b01Y3oBiL2foh2BsSTOdO-bknOQUquVObprGccoksKugDHs8X7XhyXVopXmNlKoNZNs6YgsJNQY583ukv-zRygA-R1KbJ-l_fJx_W-_MPiP8CyiulCJ2t-WZqWZFnjcsW0lkeuoZDIaBbNsfw"/>
+            </div>
+            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-40 whitespace-nowrap">
+                <div class="font-label-caps text-label-caps text-secondary">VANTIS</div>
+                <div class="text-xs text-on-surface-variant truncate">The Obsidian Collection</div>
+            </div>
+        </div>
+        <nav class="flex flex-col gap-2 mt-8 w-full" id="side-nav">
+            <a id="sidenav-watches" class="flex items-center gap-4 p-3 rounded-lg text-on-surface-variant hover:text-secondary hover:bg-surface-container-high transition-all group-hover:translate-x-1 duration-300 w-full relative" href="/stitch_vantis_lateral_fire_experience/vantis_3d_watches_collection/code.html">
+                <span class="material-symbols-outlined flex-shrink-0" data-icon="watch">watch</span>
+                <span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-14 whitespace-nowrap">Watches</span>
+            </a>
+            <a id="sidenav-perfumes" class="flex items-center gap-4 p-3 rounded-lg text-on-surface-variant hover:text-secondary hover:bg-surface-container-high transition-all group-hover:translate-x-1 duration-300 w-full relative" href="/stitch_vantis_lateral_fire_experience/vantis_3d_perfumes_collection/code.html">
+                <span class="material-symbols-outlined flex-shrink-0" data-icon="water_drop">water_drop</span>
+                <span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-14 whitespace-nowrap">Perfumes</span>
+            </a>
+            <a id="sidenav-jewelry" class="flex items-center gap-4 p-3 rounded-lg text-on-surface-variant hover:text-secondary hover:bg-surface-container-high transition-all group-hover:translate-x-1 duration-300 w-full relative" href="/stitch_vantis_lateral_fire_experience/vantis_3d_jewelry_collection_infinite/code.html">
+                <span class="material-symbols-outlined flex-shrink-0" data-icon="diamond">diamond</span>
+                <span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-14 whitespace-nowrap">Jewelry</span>
+            </a>
+        </nav>
+    </div>
+    <div class="flex flex-col gap-4 w-full px-4 mb-8">
+        <button class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-label-caps text-label-caps text-secondary border border-secondary/30 py-3 px-4 rounded hover:bg-secondary/10 whitespace-nowrap">
+            Request Private Viewing
+        </button>
+        <div class="flex flex-col gap-2 w-full mt-4 border-t border-outline-variant/20 pt-4">
+            <a class="flex items-center gap-4 p-2 text-on-surface-variant hover:text-secondary transition-all w-full relative" href="#">
+                <span class="material-symbols-outlined flex-shrink-0 text-sm" data-icon="settings">settings</span>
+                <span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-10 whitespace-nowrap text-[10px]">Settings</span>
+            </a>
+            <a class="flex items-center gap-4 p-2 text-on-surface-variant hover:text-secondary transition-all w-full relative" href="#">
+                <span class="material-symbols-outlined flex-shrink-0 text-sm" data-icon="contact_support">contact_support</span>
+                <span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-10 whitespace-nowrap text-[10px]">Support</span>
+            </a>
+        </div>
+    </div>
+</aside>
+
+<!-- Main Content -->
+<main class="flex-grow pt-[88px] md:pt-[100px] pb-24 md:ml-20">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+
+        <!-- Back Button -->
+        <div class="pt-8 pb-6">
+            <a id="back-btn" class="group flex items-center gap-2 text-on-surface-variant hover:text-secondary transition-colors duration-300 w-fit" href="#">
+                <span class="material-symbols-outlined text-sm transition-transform group-hover:-translate-x-1" data-icon="arrow_back">arrow_back</span>
+                <span class="font-label-caps text-label-caps uppercase tracking-widest border-b border-transparent group-hover:border-secondary transition-all">Back to Collection</span>
+            </a>
+        </div>
+
+        <!-- Product Showcase Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-start min-h-[700px]">
+
+            <!-- Left: Large Product Image -->
+            <div class="col-span-1 md:col-span-7 h-full flex flex-col gap-6">
+                <div class="relative w-full h-[500px] md:h-[768px] border border-[#1A1A1A] overflow-hidden group glow-hover transition-all duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10 opacity-60"></div>
+                    <img id="product-image" alt="Product" class="w-full h-full object-cover img-desaturate scale-105 group-hover:scale-100 transition-transform duration-1000" src=""/>
+                </div>
+            </div>
+
+            <!-- Right: Product Details -->
+            <div class="col-span-1 md:col-span-5 flex flex-col justify-start h-full pl-0 md:pl-8 mt-6 md:mt-0 pt-0 md:pt-4">
+
+                <!-- Category Label -->
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="w-8 h-[1px] bg-secondary"></span>
+                    <span id="product-category-label" class="font-label-caps text-label-caps text-secondary tracking-widest uppercase"></span>
+                </div>
+
+                <!-- Product Name -->
+                <h1 id="product-name" class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-2"></h1>
+
+                <!-- Subtitle -->
+                <p id="product-subtitle" class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-8"></p>
+
+                <!-- Description -->
+                <p id="product-description" class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-md"></p>
+
+                <!-- Price -->
+                <div class="flex items-baseline gap-4 mb-10">
+                    <span id="product-price" class="font-headline-md text-headline-md text-secondary"></span>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                    <!-- Add to Cart (primary, gold filled) -->
+                    <button class="w-full sm:w-auto px-12 py-5 bg-secondary text-primary-container font-label-caps text-label-caps tracking-widest uppercase hover:bg-secondary/90 transition-all duration-300 flex items-center justify-center gap-4 group">
+                        Add to Cart
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">shopping_bag</span>
+                    </button>
+                    <!-- Request Private Viewing (secondary, outlined) -->
+                    <button class="w-full sm:w-auto px-12 py-5 bg-primary-container border border-secondary text-on-surface font-label-caps text-label-caps tracking-widest uppercase hover:bg-secondary hover:text-primary-container transition-all duration-500 flex items-center justify-center gap-4 group">
+                        Request Private Viewing
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    </button>
+                </div>
+
+                <!-- Product Details Grid -->
+                <div class="border-t border-[#1A1A1A] pt-8">
+                    <h3 class="font-label-caps text-label-caps text-secondary tracking-widest uppercase mb-6">Product Details</h3>
+                    <div id="product-details-grid" class="grid grid-cols-2 gap-x-8 gap-y-6">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="w-full py-12 bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/20 flex flex-col items-center justify-center gap-6 px-margin-desktop md:ml-20 transition-all duration-500">
+    <div class="font-headline-md text-headline-md text-secondary tracking-[0.2em] uppercase">VANTIS</div>
+    <div class="flex gap-8 font-label-caps text-label-caps">
+        <a class="text-on-surface-variant hover:text-secondary underline-offset-8 transition-colors" href="#">Privacy Policy</a>
+        <a class="text-on-surface-variant hover:text-secondary underline-offset-8 transition-colors" href="#">Terms of Service</a>
+        <a class="text-on-surface-variant hover:text-secondary underline-offset-8 transition-colors" href="#">Shipping &amp; Returns</a>
+    </div>
+    <div class="font-label-caps text-label-caps text-on-surface-variant mt-4 opacity-50">
+        © 2024 VANTIS LUXURY. ALL RIGHTS RESERVED.
+    </div>
+</footer>
+
+<script>
+    const PRODUCTS = {
+        'aethelgard': {
+            name: 'The Aethelgard',
+            subtitle: 'Masterpiece Collection',
+            category: 'watches',
+            categoryLabel: 'Watches — The Obsidian Collection',
+            categoryUrl: '/stitch_vantis_lateral_fire_experience/vantis_3d_watches_collection/code.html',
+            description: 'Forged in silence. A kinetic masterpiece encased in darkened titanium, featuring a floating tourbillon that defies gravity. Each component hand-finished to mirror perfection.',
+            price: '€145,000',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDB6zDx4luAt5w-Ewy4IhtKr6iEMHET9na-1rWBhrQHNlwZro-rmOrhRgLorD0tdh_9oIN1JPEqf0qVuq7CwEFSweGXcPOK6d6DeoFkTKA8VxKObcO8DoQpy9ed_ZPe-OwE6qrBZ3-d1EKQ9EZfqP9SdIzRlIEDO-hqbehH7THp-gV3xNQUuSeVPJoao8gFlct3tDuN7GXsVJVBdHooWL7aFO_lU1jbTLZHMvK3a-fOQiLHXc0ogEG83qXc0NHDzUXXA88v2gAKSuA',
+            details: { 'Caliber': 'V-902 Manual', 'Power Reserve': '72 Hours', 'Case Material': 'Darkened Titanium', 'Water Resistance': '30m' }
+        },
+        'obsidian-chrono': {
+            name: 'Obsidian Chronograph',
+            subtitle: 'Performance Series',
+            category: 'watches',
+            categoryLabel: 'Watches — The Obsidian Collection',
+            categoryUrl: '/stitch_vantis_lateral_fire_experience/vantis_3d_watches_collection/code.html',
+            description: 'Speed rendered in obsidian. A high-performance chronograph with ceramic bezel and luminescent gold indices. Built for those who measure time in tenths.',
+            price: '€98,000',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCf4KBEnukeleUKGmOAxIwt9ZEsRKDeLvc8ytOT-k6Pxt9duA2SKjWdeO4mKNy8Qyw9Xf7P0jh0fs7vQf5mH8Ww7ZilixqdI78hoD8bWEY83qApxNzZmbF4LBg1SJklx-rDCvjMj8fav6PG3jEkViRof0ycYV4I80OtzWUpDWtKK38GaOcSO-G5vkF9CMVDzg9oZNSMpceFbTlZ3YKQGEeEk1T6rHm24soAXLk7g4rHxgR11qjQZbOLqMxXnq6N3vG1pZXWCVELRV4',
+            details: { 'Caliber': 'V-120 Automatic', 'Power Reserve': '48 Hours', 'Case Material': 'Black Ceramic', 'Water Resistance': '100m' }
+        },
+        'celestial-tourbillon': {
+            name: 'Celestial Tourbillon',
+            subtitle: 'Heritage Line',
+            category: 'watches',
+            categoryLabel: 'Watches — The Obsidian Collection',
+            categoryUrl: '/stitch_vantis_lateral_fire_experience/vantis_3d_watches_collection/code.html',
+            description: 'A suspended ballet of mechanics. The exposed flying tourbillon rotates once per minute, visible through the sapphire dial. The pinnacle of horological achievement.',
+            price: '€210,000',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA2hJwK3u7zGjj-hfIZBYFl4ImbpbVZUKbH6ZvO4xDNEAx3Ej0Q2P_dyRsisj-6SLBdoCzN_3TRaWSDx2gUQo1WRBntEKSOI6s_vNoPR6hc__xfHjOH-xm8Zb4XKDQHI3Zu6l_RPSKlDSwydK1eK1juwS5AYhCQ2Fs1vsjG8_zDTABTFeG9_clfivS4hrrzeS3vP7p0GStcE1rbVoDvPNoQvuW2OMf4gNHZb85-QKv8t7wfCe0ajLeTT4AnG5IK-_OjLPijHgRg6Lc',
+            details: { 'Complication': 'Flying Tourbillon', 'Power Reserve': '96 Hours', 'Case Material': 'Platinum', 'Sapphire Crystal': 'Double-Domed' }
+        },
+        'midnight-diver': {
+            name: 'Midnight Diver',
+            subtitle: 'Expedition Series',
+            category: 'watches',
+            categoryLabel: 'Watches — The Obsidian Collection',
+            categoryUrl: '/stitch_vantis_lateral_fire_experience/vantis_3d_watches_collection/code.html',
+            description: 'Pressure-tested to 500 metres. A dive watch of uncompromising resilience, with ceramic bezel and luminous indices that pierce absolute darkness.',
+            price: '€67,000',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDXVETBMwqo7tYu_3n7Dzio2miM3fH2GWWmuCaJWRtcbW974VxRZYdQQQOr12QL3WAdAhD1JJDTiK0UQf5rTgmGMH1uTCQxxQgnJedhKxoViP2uYg0DASXq2XqBk6g-nwMhj58RbEerbms6czQEpQKiPpCcUvPSH5DmUqH8MNv4GVRvYTCltorZrygr5aT5OJpKSz5jCexW0fLQ14R8jnzlYpfIi3kgpmesHmt8E9ap9A95_wdj6XwVkEmRLELt9oOZVl38oJdLOc8',
+            details: { 'Caliber': 'V-310 Automatic', 'Water Resistance': '500m', 'Case Material': 'Grade 5 Titanium', 'Bezel': 'Ceramic Unidirectional' }
+        },
+        'heritage-gold': {
+            name: 'Heritage Gold',
+            subtitle: 'Classic Series',
+            category: 'watches',
+            categoryLabel: 'Watches — The Obsidian Collection',
+            categoryUrl: '/stitch_vantis_lateral_fire_experience/vantis_3d_watches_collection/code.html',
+            description: 'Time distilled into gold. A classic dress watch with 18k rose gold case and hand-stitched alligator strap. Timeless elegance for those who inherit the future.',
+            price: '€89,000',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD9AEQCopP7tvZ0Fxi0ceC80SzSpjjA4cIec5S4RQWk3yHwUDNOllEaZoLr9rK_fmBsMdirArOnLSUJbU4GCDrDj-YY3TZeqpCRY4lXPIwGAIJytpKeLzSlgIuVzI90GsAtaTWpaICaTZHD_uvtVZ48rThuL2o9nJCZ5rxXOHUfTtfXbVb0EOyCpGBqr4wvF4CHEV31ISFaNEUB-PMI4n9XcrqOFtSbrx-tZgpmsukE_jSwUWdwEWmV-gGn7zkOvxbsncCbspE9LKM',
+            details: { 'Case Material': '18k Rose Gold', 'Strap': 'Hand-Stitched Alligator', 'Caliber': 'V-500 Manual', 'Power Reserve': '60 Hours' }
+        },
+        'ambre-lumiere': {
+            name: 'Ambre Lumière',
+            subtitle: 'Extrait de Parfum',
+            category: 'perfumes',
+            categoryLabel: 'Perfumes — The Obsidian Collection',
+            categoryUrl: '/stitch_vantis_lateral_fire_experience/vantis_3d_perfumes_collection/code.html',
+            description: 'Warm amber resin and Madagascan vanilla ignite against a base of aged sandalwood. A fragrance of golden afternoons and whispered secrets.',
+            price: '€890',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCMGslJ7h0FnDiDcezzDRH3d9wPrzB3zfnLsa6ixn641w9GHrRtE5nNodyIcKccH1GMgh5nAH9WNwxc89OK4-Onj7FWdlA5Yz6mfH2H8GoCMfDnbmnrBb1hjJFZAxJsO6qggVu3DNcS2fgaozW8Tt2739nfrUrdcAqduLu15Xs8amjPbChWntEpkjquuIzo6Y_Vt9OgO2REmnqVU--k3IC5UldWMVys6JztLE11VFfbSDu-NUIRN-3ZVqn7MW3prT9mFggGNqX5JVg',
+            details: { 'Top Notes': 'Bergamot, Saffron', 'Heart Notes': 'Amber, Oud', 'Base Notes': 'Vanilla, Sandalwood', 'Concentration': 'Extrait 40%' }
+        },
+        'obsidian-oud': {
+            name: 'Obsidian Oud',
+            subtitle: 'Extrait de Parfum',
+            category: 'perfumes',
+            categoryLabel: 'Perfumes — The Obsidian Collection',
+            categoryUrl: '/stitch_vantis_lateral_fire_experience/vantis_3d_perfumes_collection/code.html',
+            description: 'The rarest agarwood from Assam meets smoked vetiver and black pepper. A fragrance of absolute authority — worn, never announced.',
+            price: '€1,200',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBsG8L-IyXT17b4DpIR76RclhJuI6BJd19aGRK8acr-vbZMNjuxkaV5VfCttCBIX227qObBa-qwKn660ATseCj3iWgEdi4TUG-ffpglaApddrLs4357Z4ldp4CCZkWHVu3sw4nMV6gLVCxu9UGBO6ksDOExWlPT6JrY_oGz3TqIKjkc7CPTPoLvoe4NTfCPwQ1QS-5nckEVpiysAzuKJ9v6sieggyYXSHn-JNb9wlIco0_4EFUkebzmyruvEiXwTEnYJ4qkgZjP7zM',
+            details: { 'Top Notes': 'Black Pepper, Cardamom', 'Heart Notes': 'Assam Oud, Rose', 'Base Notes': 'Smoked Vetiver, Musk', 'Concentration': 'Extrait 45%' }
+        },
+        'celestial-bloom': {
+            name: 'Celestial Bloom',
+            subtitle: 'Extrait de Parfum',
+            category: 'perfumes',
+            categoryLabel: 'Perfumes — The Obsidian Collection',
+            categoryUrl: '/stitch_vantis_lateral_fire_experience/vantis_3d_perfumes_collection/code.html',
+            description: 'Bulgarian rose absolute and orris butter bloom over a white musk drydown. Floral architecture of rare beauty — a garden at the edge of night.',
+            price: '€750',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAUOFHbvWJqfZT_v5F4y8fEfnB0-2dd65SdCDIdr1KVFumVpGbn1bM17txwtiHEKjB6ZOXqRj6eTn1noMmGMIJUqkteQF0DPSneltSF4wQoR_BsMpwOa19v99iECQkpfF_7_hlAoQX7iEfQiV6WnOQoVn-Bn1_z8nSz5HIUIxz2Dl30MKJRWv8QlMMNBoIHcyDipaDvShu0e9l-X-W5WGNkeE_Hb3hUtUuGVmMNhjgrupwcPvdrA5r5iEut07fTvnkMYby8uLb_zOo',
+            details: { 'Top Notes': 'Neroli, Peach', 'Heart Notes': 'Bulgarian Rose, Orris', 'Base Notes': 'White Musk, Cedarwood', 'Concentration': 'Extrait 40%' }
+        },
+        'nocturnal-iris': {
+            name: 'Nocturnal Iris',
+            subtitle: 'Extrait de Parfum',
+            category: 'perfumes',
+            categoryLabel: 'Perfumes — The Obsidian Collection',
+            categoryUrl: '/stitch_vantis_lateral_fire_experience/vantis_3d_perfumes_collection/code.html',
+            description: 'Powdered iris root meets dark patchouli and incense. An enigmatic fragrance that moves between shadow and candlelight — for those who inhabit both.',
+            price: '€980',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC6TuiIlgNe4CVIa5CAMtTwtu4YtNE9UvMksldf9tuIG0CptTxw2UOIbrTJhMVq85-MKplDeimO5gOH5yb7ANWQ_EP_i0pQygWaOrtiyhMk1i9BBv4fUdshsssNjM_Ld3u10iWmJSWAPzWzuXvWgM17oNm7zp93rxsgUCo1Zku3AOd7NB-aiTSuhdjMZEDcZGMi7_vQPTH_vbXm8r5D1H8Z8D9DPWl4Q1Kr5QGHjbFLngH0sf8qNwZmDg1VGuOjHohobLJQYDJnfT8',
+            details: { 'Top Notes': 'Green Iris, Violet', 'Heart Notes': 'Iris Root, Patchouli', 'Base Notes': 'Incense, Benzoin', 'Concentration': 'Extrait 42%' }
+        },
+        'marbre-noir': {
+            name: 'Marbre Noir',
+            subtitle: 'Extrait de Parfum',
+            category: 'perfumes',
+            categoryLabel: 'Perfumes — The Obsidian Collection',
+            categoryUrl: '/stitch_vantis_lateral_fire_experience/vantis_3d_perfumes_collection/code.html',
+            description: 'Charcoal accord and raw leather open into labdanum and dark woods. An uncompromising presence — the scent of power in repose.',
+            price: '€1,100',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBKedocR1wo4oq4_sytgOh_5-ptTwY6uX-9a_31ueNccTLbPDVWF_i-GjhGcqYbhpx0XlpSB-mEW-LUMfCc5i2q5JAkpxjqO0eMwbE0QtRUtd-a__why9fj2jmNNxj8RKxKySzdmO1RoS_WWPSeKwS6H1snKYeRmoPwa_7FLaDBjI0LfDHsvv-AEzP41AOugONIhUvKddBUbShjd1EECQ9uMUukp0JTOaiLstDDIyzQh5-QUQhgGyJcn0mmolI0jjfJjGV0TVEV5c0',
+            details: { 'Top Notes': 'Charcoal, Black Pepper', 'Heart Notes': 'Leather, Labdanum', 'Base Notes': 'Dark Woods, Amber', 'Concentration': 'Extrait 45%' }
+        },
+        'eternal-bloom': {
+            name: 'The Eternal Bloom',
+            subtitle: 'Diamond Necklace',
+            category: 'jewelry',
+            categoryLabel: 'Jewelry — The Obsidian Collection',
+            categoryUrl: '/stitch_vantis_lateral_fire_experience/vantis_3d_jewelry_collection_infinite/code.html',
+            description: 'A cascade of 340 brilliant-cut diamonds set in blackened 18k white gold. The central 5.2ct D-colour diamond is suspended as if in perpetual bloom.',
+            price: '€320,000',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuASWlfrwHTQ2vzxtaHRZf6IRqizFgaQWhFn-OVOlRdtT2dcCSMvmZQkDDGoDPoH2WedJuADk6rzcBOBJp98Y3nIlPdVFwHStjKZIKZJMMbmE2zjVB3DFilCx8_V930W-jsewJwHpMr6Rn3-D4DhQpMvEyTuEB2YNhjomcBczMK8w6DfHGLYk7afC4E1tP-9lDvly7tDXaDbvfxIj75mEHX5sh_Ic66FP7XtUiz5ewhgx5OwKdOAD2T4cJeo6hGeSP89F46IgTATgNw',
+            details: { 'Central Stone': '5.2ct D-colour Diamond', 'Setting': 'Blackened 18k White Gold', 'Side Stones': '340 Brilliant-Cut Diamonds', 'Certificate': 'GIA Certified' }
+        },
+        'aurum-hoops': {
+            name: 'Aurum Hoops',
+            subtitle: 'Gold Earrings',
+            category: 'jewelry',
+            categoryLabel: 'Jewelry — The Obsidian Collection',
+            categoryUrl: '/stitch_vantis_lateral_fire_experience/vantis_3d_jewelry_collection_infinite/code.html',
+            description: 'Sculptural hoops in 22k yellow gold with hand-hammered texture. Each hoop is a statement of confidence — geometric, bold, and entirely singular.',
+            price: '€48,000',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBl9K0IpCNs0Ib3VUaf6vtgZLi3S_FBWyW2uBQxnXOBAeXodGcfRwZ7blJln420RDyyQmpcfPYi3f5XSe-TJsN2N1auSfsXfDreXCK7uySFLpsWNPZ2lK6aMY6DCJCtQs5X_kWsxyQKTIkU70pHw4btU94TwjEwSHWMWIvn1bmSrpb820fUnjmL4kqvRyJLgPmVEvwzNCrJGIG83hyQLJeRTOMpvYWxzcAF8Tcy4KX7lNvF02XVaD18Bb5KJYmPJksP94Xls4yIzv8',
+            details: { 'Material': '22k Yellow Gold', 'Finish': 'Hand-Hammered', 'Diameter': '45mm', 'Weight': '18g per piece' }
+        },
+        'obsidian-emerald': {
+            name: 'Obsidian Emerald',
+            subtitle: 'Emerald Ring',
+            category: 'jewelry',
+            categoryLabel: 'Jewelry — The Obsidian Collection',
+            categoryUrl: '/stitch_vantis_lateral_fire_experience/vantis_3d_jewelry_collection_infinite/code.html',
+            description: 'A 7.4ct Colombian emerald of exceptional clarity, set in brushed dark titanium. The deep forest green against black metal is a study in absolute contrast.',
+            price: '€195,000',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAP9ML1DY21OKa_dyo4-eXP0Kcpd5enZFI33JdKVI7pDEwsQr8-b6MHhfG4nQLwcI2auNdowLY04ZBl8Vs0b5CEWCXsXcC16hsKrLhZkRy0pjdbDPad2UkyS52NfUdNbfph0ZiXQ8IDx_xJLBIqs1Ayw14AtSiVBFCkFdgx-yIQMosSAi9Af85JTkXU-i5RxERjHYTp-FJtmwbDgQ25WcKpQsYSvlXt6uWBwTbx-XzBK408yNaxWbuETNGrnTOvp699ZvgBkw7Gq28',
+            details: { 'Centre Stone': '7.4ct Colombian Emerald', 'Setting': 'Brushed Dark Titanium', 'Side Stones': 'Pave Diamond Shoulders', 'Certificate': 'Gübelin Certified' }
+        },
+        'azure-sapphire': {
+            name: 'Azure Sapphire',
+            subtitle: 'Sapphire Bracelet',
+            category: 'jewelry',
+            categoryLabel: 'Jewelry — The Obsidian Collection',
+            categoryUrl: '/stitch_vantis_lateral_fire_experience/vantis_3d_jewelry_collection_infinite/code.html',
+            description: 'Forty-two Kashmir sapphires and pave diamonds in an architectural link bracelet. Each sapphire selected for its velvety cornflower blue — the rarest hue in existence.',
+            price: '€280,000',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD5bq2hB0K2gLmBmvhUtcYXZ3kLNSAqAkrtXJEMS2CfUf_c9s9__-ouh8ArDLq48D1qsLhYOqGtwb3gf7JQ-ldkBsqAbaA7IxRibx0uraTzKmayWVFAnmLzn22bYf0X0_3sXA0R0-h_YFqkldc5C0lUggAX4Kl_Gxhd0GD7qi3ZCvf51wz9v28eKQ1w98caUTQlx619G7E9_2Be6D5ds5_6pWmaK6jVXwzl8AdepwEPXIr57QDxa9ASxWDcn-rjWIx66klBw2kBiR8',
+            details: { 'Sapphires': '42 Kashmir Sapphires', 'Setting': '18k White Gold', 'Diamonds': 'Pave F-colour VVS1', 'Certificate': 'GRS Certified' }
+        },
+        'tahitian-pearl': {
+            name: 'Tahitian Pearl',
+            subtitle: 'Pearl Brooch',
+            category: 'jewelry',
+            categoryLabel: 'Jewelry — The Obsidian Collection',
+            categoryUrl: '/stitch_vantis_lateral_fire_experience/vantis_3d_jewelry_collection_infinite/code.html',
+            description: 'A 16mm black Tahitian pearl of peacock overtone, cradled in a gold filigree setting with rose-cut diamonds. Oceanic rarity transformed into eternal art.',
+            price: '€42,000',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCktSGA_TeBQHux-S-3Twkii9FnJqH8NuOSX8iS3_wWttS3K1u3iWR2fB8JluYNCeSgQwPu0J3NmoP79rV-yQWiFtgKfvcWTEjnaG66BhyhJYv0H5VSKYTjzOVIXIrlL5kAJ8U_oyHJreQ5ZVfPVMbQXUOCXMXkdCVgvDTt7ni71rgFvOA-_iWOIbuV0d-zDqDFmIgLMuhAXRxMwDo7zoQUsezD8qsRf11MEkZStodbeLgXSjDOnLjfy16SFVQTYwQREgJgdktMf6A',
+            details: { 'Pearl': '16mm Black Tahitian', 'Overtone': 'Peacock', 'Setting': '18k Yellow Gold Filigree', 'Diamonds': 'Rose-Cut F-colour' }
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Hide swipe overlay
+        const swipeOverlay = document.querySelector('.swipe-transition');
+        setTimeout(() => {
+            if (swipeOverlay) swipeOverlay.style.display = 'none';
+        }, 1600);
+
+        // Read product ID from URL
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        if (!id || !PRODUCTS[id]) {
+            window.location.href = '/';
+            return;
+        }
+
+        const product = PRODUCTS[id];
+
+        // Set page title
+        document.title = 'VANTIS — ' + product.name;
+
+        // Populate image
+        const imgEl = document.getElementById('product-image');
+        imgEl.src = product.image;
+        imgEl.alt = product.name;
+
+        // Populate text fields
+        document.getElementById('product-name').textContent = product.name;
+        document.getElementById('product-subtitle').textContent = product.subtitle;
+        document.getElementById('product-category-label').textContent = product.categoryLabel;
+        document.getElementById('product-description').textContent = product.description;
+        document.getElementById('product-price').textContent = product.price;
+
+        // Set back button
+        document.getElementById('back-btn').href = product.categoryUrl;
+
+        // Set active side nav item
+        const categoryNavMap = {
+            'watches': 'sidenav-watches',
+            'perfumes': 'sidenav-perfumes',
+            'jewelry': 'sidenav-jewelry'
+        };
+        const activeNavId = categoryNavMap[product.category];
+        if (activeNavId) {
+            const activeEl = document.getElementById(activeNavId);
+            if (activeEl) {
+                // Remove hover classes, add active classes
+                activeEl.className = activeEl.className
+                    .replace('text-on-surface-variant', '')
+                    .replace('hover:text-secondary', '')
+                    .replace('hover:bg-surface-container-high', '')
+                    .replace('transition-all', '')
+                    .trim();
+                activeEl.classList.add('text-secondary', 'bg-secondary/5', 'border-r-2', 'border-secondary');
+            }
+        }
+
+        // Populate product details grid
+        const grid = document.getElementById('product-details-grid');
+        grid.innerHTML = '';
+        for (const [key, value] of Object.entries(product.details)) {
+            const cell = document.createElement('div');
+            cell.innerHTML = `
+                <span class="block font-label-caps text-label-caps text-on-surface-variant mb-2">${key}</span>
+                <span class="font-body-md text-body-md text-on-surface">${value}</span>
+            `;
+            grid.appendChild(cell);
+        }
+    });
+</script>
+</body></html>
