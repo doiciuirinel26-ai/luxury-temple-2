@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/stitch_vantis_lateral_fire_experience/vantis_cinematic_hero/code.html" }
+  ]
+}
