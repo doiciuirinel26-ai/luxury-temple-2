@@ -108,7 +108,7 @@
 <li><a class="text-on-surface hover:text-secondary transition-colors duration-300" href="#">Concierge</a></li>
 </ul>
 <div class="flex space-x-6 text-secondary">
-<button class="hover:text-secondary transition-all duration-300"><span class="material-symbols-outlined">shopping_bag</span></button>
+<a href="/cart.html" class="relative hover:text-secondary transition-all duration-300"><span class="material-symbols-outlined">shopping_bag</span><span class="cart-badge absolute -top-1 -right-1 w-4 h-4 bg-secondary text-primary-container text-[9px] font-bold rounded-full items-center justify-center" style="display:none"></span></a>
 <button class="hover:text-secondary transition-all duration-300"><span class="material-symbols-outlined">person</span></button>
 </div>
 </nav>
@@ -224,4 +224,5 @@
             if (diff > 50) triggerTransition();
         }, { passive: true });
     </script>
+<script>(function(){try{var c=JSON.parse(localStorage.getItem('vantis_cart'))||[];var n=c.reduce(function(s,i){return s+i.quantity;},0);if(n>0)document.querySelectorAll('.cart-badge').forEach(function(b){b.textContent=n>9?'9+':n;b.style.display='flex';});}catch(e){}})();</script>
 </body></html>

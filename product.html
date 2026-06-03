@@ -164,9 +164,10 @@
         </a>
         <!-- Trailing Icons -->
         <div class="flex gap-4">
-            <button class="text-on-surface hover:text-secondary transition-all duration-300">
-                <span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
-            </button>
+            <a href="/cart.html" class="relative text-on-surface hover:text-secondary transition-all duration-300">
+                <span class="material-symbols-outlined">shopping_bag</span>
+                <span class="cart-badge absolute -top-1 -right-1 w-4 h-4 bg-secondary text-primary-container text-[9px] font-bold rounded-full items-center justify-center" style="display:none"></span>
+            </a>
             <button class="text-on-surface hover:text-secondary transition-all duration-300">
                 <span class="material-symbols-outlined" data-icon="person">person</span>
             </button>
@@ -180,7 +181,10 @@
     <span class="material-symbols-outlined">arrow_back</span>
   </a>
   <span class="text-secondary tracking-[0.2em] uppercase" style="font-family:'Playfair Display',serif;font-size:20px;font-weight:400">VANTIS</span>
-  <span class="material-symbols-outlined text-on-surface-variant">shopping_bag</span>
+  <a href="/cart.html" class="relative text-on-surface-variant hover:text-secondary transition-colors">
+    <span class="material-symbols-outlined">shopping_bag</span>
+    <span class="cart-badge absolute -top-1 -right-1 w-4 h-4 bg-secondary text-primary-container text-[9px] font-bold rounded-full items-center justify-center" style="display:none"></span>
+  </a>
 </nav>
 
 <!-- SideNavBar -->
@@ -276,7 +280,7 @@
                 <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 mb-12">
                     <!-- Add to Cart (primary, gold filled) -->
-                    <button class="w-full sm:w-auto px-12 py-5 bg-secondary text-primary-container font-label-caps text-label-caps tracking-widest uppercase hover:bg-secondary/90 transition-all duration-300 flex items-center justify-center gap-4 group">
+                    <button id="add-to-cart-btn" class="w-full sm:w-auto px-12 py-5 bg-secondary text-primary-container font-label-caps text-label-caps tracking-widest uppercase hover:bg-secondary/90 transition-all duration-300 flex items-center justify-center gap-4 group">
                         Add to Cart
                         <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">shopping_bag</span>
                     </button>
@@ -520,6 +524,37 @@
 
         // Set back button
         document.getElementById('back-btn').href = product.categoryUrl;
+
+        // Cart: update badge on load
+        (function() {
+            try {
+                var cart = JSON.parse(localStorage.getItem('vantis_cart')) || [];
+                var n = cart.reduce(function(s, i) { return s + i.quantity; }, 0);
+                if (n > 0) document.querySelectorAll('.cart-badge').forEach(function(b) { b.textContent = n > 9 ? '9+' : n; b.style.display = 'flex'; });
+            } catch(e) {}
+        })();
+
+        // Cart: Add to Cart button
+        document.getElementById('add-to-cart-btn').addEventListener('click', function() {
+            var cart = [];
+            try { cart = JSON.parse(localStorage.getItem('vantis_cart')) || []; } catch(e) {}
+            var existing = cart.find(function(i) { return i.id === id; });
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ id: id, name: product.name, subtitle: product.subtitle, category: product.category, categoryLabel: product.categoryLabel, categoryUrl: product.categoryUrl, price: product.price, image: product.image, quantity: 1 });
+            }
+            localStorage.setItem('vantis_cart', JSON.stringify(cart));
+            // Update badge
+            var total = cart.reduce(function(s, i) { return s + i.quantity; }, 0);
+            document.querySelectorAll('.cart-badge').forEach(function(b) { b.textContent = total > 9 ? '9+' : total; b.style.display = 'flex'; });
+            // Button feedback
+            var btn = document.getElementById('add-to-cart-btn');
+            var origHTML = btn.innerHTML;
+            btn.innerHTML = 'Added to Cart &nbsp;<span class="material-symbols-outlined" style="font-size:18px">check</span>';
+            btn.style.background = '#c4a93a';
+            setTimeout(function() { btn.innerHTML = origHTML; btn.style.background = ''; }, 1800);
+        });
 
         // Set active side nav item
         const categoryNavMap = {

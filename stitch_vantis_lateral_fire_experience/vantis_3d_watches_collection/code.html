@@ -190,7 +190,7 @@
     <span class="material-symbols-outlined">arrow_back</span>
   </a>
   <a class="font-headline-md text-secondary tracking-[0.2em] uppercase" href="/" style="font-family:'Playfair Display',serif;font-size:20px">VANTIS</a>
-  <span class="material-symbols-outlined text-on-surface-variant">shopping_bag</span>
+  <a href="/cart.html" class="relative text-on-surface-variant hover:text-secondary transition-colors"><span class="material-symbols-outlined">shopping_bag</span><span class="cart-badge absolute -top-1 -right-1 w-4 h-4 bg-secondary text-primary-container text-[9px] font-bold rounded-full items-center justify-center" style="display:none"></span></a>
 </nav>
 <!-- TopNavBar (Shared Component) -->
 <header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 transition-opacity duration-700 ease-in-out">
@@ -208,9 +208,7 @@
             </a>
 <!-- Trailing Icons -->
 <div class="flex gap-4">
-<button class="text-on-surface hover:text-secondary transition-all duration-300">
-<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
-</button>
+<a href="/cart.html" class="relative text-on-surface hover:text-secondary transition-all duration-300"><span class="material-symbols-outlined">shopping_bag</span><span class="cart-badge absolute -top-1 -right-1 w-4 h-4 bg-secondary text-primary-container text-[9px] font-bold rounded-full items-center justify-center" style="display:none"></span></a>
 <button class="text-on-surface hover:text-secondary transition-all duration-300">
 <span class="material-symbols-outlined" data-icon="person">person</span>
 </button>
@@ -544,4 +542,5 @@
     <span style="font-size:9px;letter-spacing:0.1em;font-weight:600;text-transform:uppercase">Jewelry</span>
   </a>
 </nav>
+<script>(function(){try{var c=JSON.parse(localStorage.getItem('vantis_cart'))||[];var n=c.reduce(function(s,i){return s+i.quantity;},0);if(n>0)document.querySelectorAll('.cart-badge').forEach(function(b){b.textContent=n>9?'9+':n;b.style.display='flex';});}catch(e){}})();</script>
 </body></html>
