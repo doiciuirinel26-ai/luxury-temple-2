@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vantis | Olfactory Collection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#474646",
+                        "surface-container-low": "#1a1c1c",
+                        "secondary-container": "#af8d11",
+                        "on-primary-fixed": "#1c1b1b",
+                        "surface-container-highest": "#333535",
+                        "on-background": "#e2e2e2",
+                        "surface-container-lowest": "#0c0f0f",
+                        "on-tertiary-container": "#7a7979",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#241a00",
+                        "on-secondary-fixed-variant": "#574500",
+                        "outline-variant": "#444748",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "surface-container": "#1e2020",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-secondary-container": "#342800",
+                        "surface": "#121414",
+                        "secondary-fixed-dim": "#e9c349",
+                        "primary-container": "#0a0a0a",
+                        "surface-container-high": "#282a2b",
+                        "primary-fixed": "#e5e2e1",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "outline": "#8e9192",
+                        "on-surface": "#e2e2e2",
+                        "inverse-on-surface": "#2f3131",
+                        "surface-tint": "#c9c6c5",
+                        "surface-bright": "#37393a",
+                        "on-surface-variant": "#c4c7c7",
+                        "tertiary-container": "#0a0a0a",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#e5e2e1",
+                        "inverse-surface": "#e2e2e2",
+                        "primary-fixed-dim": "#c9c6c5",
+                        "inverse-primary": "#5f5e5e",
+                        "secondary": "#e9c349",
+                        "primary": "#c9c6c5",
+                        "on-secondary": "#3c2f00",
+                        "surface-dim": "#121414",
+                        "surface-variant": "#333535",
+                        "on-tertiary": "#313030",
+                        "on-primary": "#313030",
+                        "tertiary": "#c8c6c5",
+                        "on-primary-container": "#7b7979",
+                        "background": "#121414",
+                        "secondary-fixed": "#ffe088",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "80px",
+                        "gutter": "32px",
+                        "container-max": "1440px",
+                        "unit": "8px",
+                        "margin-mobile": "24px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "headline-xl": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "body-md": ["Inter"],
+                        "headline-xl-mobile": ["Playfair Display"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "display-lg": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "display-lg-mobile": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "300" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>body {
+            background-color: #0a0a0a;
+            color: #e2e2e2;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(18, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .glow-hover:hover {
+            text-shadow: 0 0 10px rgba(233, 195, 73, 0.5);
+        }
+
+        /* Particle effect styles */
+        .particle-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: theme('colors.secondary');
+            border-radius: 50%;
+            opacity: 0;
+            box-shadow: 0 0 8px theme('colors.secondary');
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes glowFlash {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            30% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(2.5);
+            }
+        }
+
+        .glow-flash {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(233,195,73,0.9) 0%, rgba(233,195,73,0.3) 40%, rgba(233,195,73,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 15;
+            mix-blend-mode: screen;
+        }
+
+        /* 3D Carousel Styles */
+        .carousel-3d-container {
+            perspective: 1200px;
+            transform-style: preserve-3d;
+        }
+
+        .carousel-item-3d {
+            position: absolute;
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s ease, z-index 0.8s;
+            will-change: transform, opacity;
+        }
+        </style>
+</head>
+<body class="font-body-md text-body-md antialiased selection:bg-secondary selection:text-on-secondary">
+<!-- TopNavBar -->
+<nav class="glass-nav fixed top-0 w-full z-[100] border-b border-outline-variant/30 transition-opacity duration-700 ease-in-out">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-6">
+<div class="hidden md:flex gap-8">
+<a class="text-secondary border-b border-secondary pb-1 font-label-caps text-label-caps transition-all duration-300" href="#">Collections</a>
+<a class="text-on-surface hover:text-secondary transition-colors duration-500 font-label-caps text-label-caps glow-hover" href="#">Bespoke</a>
+<a class="text-on-surface hover:text-secondary transition-colors duration-500 font-label-caps text-label-caps glow-hover" href="#">Heritage</a>
+<a class="text-on-surface hover:text-secondary transition-colors duration-500 font-label-caps text-label-caps glow-hover" href="#">Concierge</a>
+</div>
+<a class="font-headline-md text-headline-md text-secondary tracking-[0.2em] uppercase absolute left-1/2 transform -translate-x-1/2" href="#">
+                VANTIS
+            </a>
+<div class="flex gap-6 items-center ml-auto">
+<button class="text-on-surface hover:text-secondary transition-colors duration-500">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+<button class="text-on-surface hover:text-secondary transition-colors duration-500">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col h-full py-8 justify-between fixed left-0 h-screen w-20 hover:w-64 transition-all duration-500 z-50 bg-surface-container-lowest dark:bg-surface-container-lowest border-r border-secondary/10 shadow-[5px_0px_30px_rgba(233,195,73,0.05)] group overflow-hidden">
+<div class="flex flex-col items-center group-hover:items-start group-hover:px-6 w-full gap-12 mt-24 transition-all duration-300">
+<div class="w-full">
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-secondary p-4 w-full hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">watch</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300">Watches</span>
+</a>
+<a class="flex items-center gap-4 text-secondary bg-secondary/5 border-r-2 border-secondary p-4 w-full hover:bg-surface-container-high transition-all rounded-lg mt-2" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">water_drop</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300">Perfumes</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-secondary p-4 w-full hover:bg-surface-container-high transition-all rounded-lg mt-2" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">diamond</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300">Jewelry</span>
+</a>
+</div>
+</div>
+<div class="flex flex-col items-center group-hover:items-start group-hover:px-6 w-full gap-4 transition-all duration-300 mb-8">
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-secondary p-4 w-full hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">settings</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300">Settings</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-secondary p-4 w-full hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">contact_support</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="min-h-screen pt-32 pb-24 md:pl-20 flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Background Lighting Effect -->
+<div class="absolute inset-0 z-0 pointer-events-none flex justify-center items-center">
+<div class="w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[150px]"></div>
+</div>
+<div class="w-full mx-auto relative z-10 flex flex-col items-center w-full">
+<!-- Header Section -->
+<div class="text-center mb-16 flex flex-col items-center w-full px-margin-mobile md:px-margin-desktop">
+<a class="flex items-center gap-2 text-on-surface-variant hover:text-secondary font-label-caps text-label-caps mb-8 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                    BACK TO COLLECTIONS
+                </a>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-secondary mb-6 tracking-tight">
+                    Olfactory
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl text-center font-light">
+                    A collection of rare essences designed to evoke the sublime and the eternal.
+                </p>
+</div>
+<!-- 3D Carousel Section -->
+<div class="relative w-full flex-grow flex items-center justify-center overflow-hidden carousel-3d-container h-[600px] md:h-[700px] my-10">
+<!-- Background Ambient Glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[614px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
+<!-- Product 1 -->
+<div class="carousel-item-3d w-[75vw] md:w-[40vw] lg:w-[30vw] flex flex-col items-center group cursor-pointer" data-index="0">
+<div class="relative w-full aspect-[3/4] mb-8 rounded-lg overflow-hidden border border-surface-container-high transition-colors duration-500 shadow-2xl product-card-inner">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10"></div>
+<img alt="Ambre Lumière" class="w-full h-full object-cover transition-all duration-700 product-img" src="https://lh3.googleusercontent.com/aida/AP1WRLvAeFTsIC_C8KCQwxfNnGEPCUXvW8mbddCfeZFt8d9V_e_lPRrt9ghzxcJcAiNwHvzzleGk7lspPMwnDmLfixUUrDHCpqDXUagjccm8ryTUG_svxjocdYNTV2FWywWY-dKAsoMkeQxSHCxBEERGuE85seWnZRUFVbUu10h9nzbC7gFmrqJ-3IEO3-5jPBDc89orDG7M1JgTEeNxqsKDFcKBMDg1CENeGgSLx-XvGGgYf64Q4yNsbPkhoBs"/>
+<div class="particle-container"></div>
+</div>
+<div class="text-center z-20 product-text transition-opacity duration-300">
+<h3 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-2">Ambre Lumière</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em]">Extrait de Parfum</p>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="carousel-item-3d w-[75vw] md:w-[40vw] lg:w-[30vw] flex flex-col items-center group cursor-pointer" data-index="1">
+<div class="relative w-full aspect-[3/4] mb-8 rounded-lg overflow-hidden border border-surface-container-high transition-colors duration-500 shadow-2xl product-card-inner">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10"></div>
+<img alt="Obsidian Oud" class="w-full h-full object-cover transition-all duration-700 product-img" src="https://lh3.googleusercontent.com/aida/AP1WRLtV9ubVLA-UnQiuomTPil7-eLWn_pGyspANp6Z5znETh7W-jisijKCmLbhoeIqMJzEWH6TioTbuplIRLXsNpxQVpT6NV5v_yt6RRkArKctDdknWgR5wF2u6KhAS3N48qxhGgVyS8ah6iZBjQZsRSDD1Mhgt4hpFga_rOAkmg5JS1D2zBHgQ_PxKCY1f9ODl9uVKBjHZ3kUuahSTOMw5L8PpLcmCQ7OXg9Wn121zLPCt3vJ6qXnbG72AMA"/>
+<div class="particle-container"></div>
+</div>
+<div class="text-center z-20 product-text transition-opacity duration-300">
+<h3 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-2">Obsidian Oud</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em]">Extrait de Parfum</p>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="carousel-item-3d w-[75vw] md:w-[40vw] lg:w-[30vw] flex flex-col items-center group cursor-pointer" data-index="2">
+<div class="relative w-full aspect-[3/4] mb-8 rounded-lg overflow-hidden border border-surface-container-high transition-colors duration-500 shadow-2xl product-card-inner">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10"></div>
+<img alt="Celestial Bloom" class="w-full h-full object-cover transition-all duration-700 product-img" src="https://lh3.googleusercontent.com/aida/AP1WRLv66XKaPb-xu-EX2vrqSL4EVrYMUVXrk7y2gDbqx0HR8ILxK8l-bWrknC3efcnmGBgKbNX6_8O5nAw0mMDhicKGyuiVlPklt-RO-my8BWNVK0_BoP9nDQn5cNywZax2DHF-HOfkn5t5ITEOBPDXqEjPNxjp4KgBI4tBV8-hp-Vsokv4eqS3xi_bHTosxDmpCMaC49904Y1Yn3Ka67-5y6MJwXUZfSKXf2CfePjVJwno8i7TSGbZ-S5L_5k"/>
+<div class="particle-container"></div>
+</div>
+<div class="text-center z-20 product-text transition-opacity duration-300">
+<h3 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-2">Celestial Bloom</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em]">Extrait de Parfum</p>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="carousel-item-3d w-[75vw] md:w-[40vw] lg:w-[30vw] flex flex-col items-center group cursor-pointer" data-index="3">
+<div class="relative w-full aspect-[3/4] mb-8 rounded-lg overflow-hidden border border-surface-container-high transition-colors duration-500 shadow-2xl product-card-inner">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10"></div>
+<img alt="Nocturnal Iris" class="w-full h-full object-cover transition-all duration-700 product-img" src="https://lh3.googleusercontent.com/aida/AP1WRLtI3lw3tKGFe862i5JkqFkFULnMYiURq_tkEIaiz1KLVKi4taJvumMfvyai9n3EoFy8RDST5bJR7fWYS6PWj3dOWSxcbmS0krexU_bO_6taAJFINdcx733oH-O0FxWTiUrcJxoZ7vb-IYKzwriZZsu35a_y4_eYpW5t8FnfQA5MRxpR2e4HXNlAxMbYxfQQNs7pnjJBNoJ6OopcnMfsX5RPrJQOtzL_2CCvqGYp9q0XHT7-_OIvnu-epA"/>
+<div class="particle-container"></div>
+</div>
+<div class="text-center z-20 product-text transition-opacity duration-300">
+<h3 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-2">Nocturnal Iris</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em]">Extrait de Parfum</p>
+</div>
+</div>
+<!-- Product 5 -->
+<div class="carousel-item-3d w-[75vw] md:w-[40vw] lg:w-[30vw] flex flex-col items-center group cursor-pointer" data-index="4">
+<div class="relative w-full aspect-[3/4] mb-8 rounded-lg overflow-hidden border border-surface-container-high transition-colors duration-500 shadow-2xl product-card-inner">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10"></div>
+<img alt="Marbre Noir" class="w-full h-full object-cover transition-all duration-700 product-img" src="https://lh3.googleusercontent.com/aida/AP1WRLuGUVMCdxJgozRU2NIfRQxG5eX6HUrVkDGVT8Te9yGtqXMPepaVPeH5QEYTNo4Y9M-TWQvEG-KCi3VGFFaFghu8XDnIm_4TGCIkbl422W-G_u9hH2kis-6vrTHy-wBOlBeBxnzpJ1X-Z00aA6oyXoX9o9TTp82zj1k8iqioUTi4dxqNuZqDkGSopsTba9GbW41p10Ii0aeH2CzNzLTht24gF-9gjH1P4-kk9ZJiJdRzvqktTAy0vH-_vWU"/>
+<div class="particle-container"></div>
+</div>
+<div class="text-center z-20 product-text transition-opacity duration-300">
+<h3 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-2">Marbre Noir</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em]">Extrait de Parfum</p>
+</div>
+</div>
+<!-- Carousel Controls (Visual cues) -->
+<div class="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-4 z-30">
+<div class="w-12 h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary transition-all duration-500" id="carousel-progress-bar"></div>
+</div>
+</div>
+</div>
+<!-- Discovery CTA -->
+<div class="flex justify-center mt-10 z-20 relative">
+<button class="px-12 py-4 bg-primary-container border border-secondary text-on-surface font-label-caps text-label-caps hover:bg-secondary/10 transition-all duration-500 shadow-[0_0_15px_rgba(233,195,73,0.1)] hover:shadow-[0_0_25px_rgba(233,195,73,0.2)]">
+                    DISCOVER THE ESSENCE
+                </button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/20 flex flex-col items-center justify-center gap-6 px-margin-mobile md:px-margin-desktop md:pl-20 transition-all duration-500 relative z-20">
+<h2 class="font-headline-md text-headline-md text-secondary">VANTIS</h2>
+<div class="flex gap-8 flex-wrap justify-center">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline-offset-8 transition-all duration-500" href="#">Privacy Policy</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline-offset-8 transition-all duration-500" href="#">Terms of Service</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline-offset-8 transition-all duration-500" href="#">Shipping &amp; Returns</a>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant/50 mt-4">
+            © 2024 VANTIS LUXURY. ALL RIGHTS RESERVED.
+        </p>
+</footer>
+<!-- Carousel Logic -->
+<script>
+        // Explosion Effect Logic
+        function triggerExplosion(element) {
+            const container = element.querySelector('.particle-container');
+            if (!container) return;
+
+            // Clear previous particles and flashes
+            container.innerHTML = '';
+
+            // Create Glow Flash
+            const flash = document.createElement('div');
+            flash.classList.add('glow-flash');
+            flash.style.animation = 'glowFlash 0.7s ease-out forwards';
+            container.appendChild(flash);
+            
+            setTimeout(() => {
+                if (flash.parentNode) flash.remove();
+            }, 700);
+
+            // Create High-Fidelity Particles
+            const numParticles = 60;
+            const colors = ['#e9c349', '#ffe088', '#ffffff', '#ffb4ab'];
+
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Randomize properties for more organic feel
+                const size = Math.random() * 6 + 2; // 2px to 8px
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 60 + Math.random() * 220; // 60px to 280px distance
+                
+                const tx = Math.cos(angle) * velocity + 'px';
+                const ty = Math.sin(angle) * velocity + 'px';
+                
+                const duration = 0.5 + Math.random() * 0.7; // 0.5s to 1.2s
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.backgroundColor = color;
+                particle.style.boxShadow = `0 0 ${size * 2}px ${color}`;
+                particle.style.setProperty('--tx', tx);
+                particle.style.setProperty('--ty', ty);
+                particle.style.animation = `explode ${duration}s cubic-bezier(0.1, 0.8, 0.2, 1) forwards`;
+
+                container.appendChild(particle);
+                
+                // Clean up particle after animation
+                setTimeout(() => {
+                    if (particle.parentNode) particle.remove();
+                }, duration * 1000);
+            }
+        }
+
+        // 3D Carousel Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const items = document.querySelectorAll('.carousel-item-3d');
+            const progressBar = document.getElementById('carousel-progress-bar');
+            let activeIndex = 2; // Start middle
+
+            function updateCarousel() {
+                items.forEach((item, index) => {
+                    const offset = index - activeIndex;
+                    const absOffset = Math.abs(offset);
+                    const sign = Math.sign(offset);
+
+                    const img = item.querySelector('.product-img');
+                    const text = item.querySelector('.product-text');
+                    const innerCard = item.querySelector('.product-card-inner');
+                    
+                    if (offset === 0) {
+                        // Active card
+                        item.style.transform = `translateX(0) translateZ(0) rotateY(0) scale(1)`;
+                        item.style.opacity = 1;
+                        item.style.zIndex = 20;
+                        item.classList.add('pointer-events-auto');
+                        
+                        // Active styling
+                        if (img) img.classList.remove('grayscale');
+                        if (innerCard) innerCard.classList.add('border-secondary');
+                        if (text) text.style.opacity = 1;
+
+                    } else {
+                        // Inactive cards
+                        // Adjust translation and rotation based on distance from center
+                        const tx = sign * (40 + absOffset * 10); // Percentage shift
+                        const tz = -150 * absOffset; // Push back in Z space
+                        const ry = sign * -35; // Rotate inwards
+                        const scale = 1 - (absOffset * 0.1);
+
+                        item.style.transform = `translateX(${tx}%) translateZ(${tz}px) rotateY(${ry}deg) scale(${scale})`;
+                        item.style.opacity = Math.max(1 - (absOffset * 0.4), 0);
+                        item.style.zIndex = 10 - absOffset;
+                        
+                        // Inactive styling
+                        if (img) img.classList.add('grayscale');
+                        if (innerCard) innerCard.classList.remove('border-secondary');
+                        if (text) text.style.opacity = 0;
+                    }
+                });
+
+                // Update Progress Bar
+                if (progressBar) {
+                    progressBar.style.width = `${((activeIndex + 1) / items.length) * 100}%`;
+                }
+            }
+
+            // Bind click events to navigate
+            items.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    if (activeIndex !== index) {
+                        activeIndex = index;
+                        updateCarousel();
+                        // Trigger explosion slightly after the animation starts
+                        setTimeout(() => {
+                            triggerExplosion(items[activeIndex]);
+                        }, 300);
+                    }
+                });
+            });
+
+            // Initialize carousel
+            updateCarousel();
+            
+            // Trigger initial explosion
+            setTimeout(() => {
+                triggerExplosion(items[activeIndex]);
+            }, 800);
+        });
+
+    </script>
+</body></html>

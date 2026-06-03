@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VANTIS - Collections</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;family=Playfair+Display:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#e9c349",
+                        "surface-container-high": "#282a2b",
+                        "surface-container": "#1e2020",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "primary-container": "#0a0a0a",
+                        "on-primary-fixed": "#1c1b1b",
+                        "inverse-surface": "#e2e2e2",
+                        "outline": "#8e9192",
+                        "surface": "#121414",
+                        "on-surface": "#e2e2e2",
+                        "primary": "#c9c6c5",
+                        "on-primary-container": "#7b7979",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "error-container": "#93000a",
+                        "secondary-container": "#af8d11",
+                        "surface-bright": "#37393a",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-error": "#690005",
+                        "surface-tint": "#c9c6c5",
+                        "background": "#121414",
+                        "secondary-fixed": "#ffe088",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-surface-variant": "#c4c7c7",
+                        "on-secondary": "#3c2f00",
+                        "tertiary": "#c8c6c5",
+                        "on-primary": "#313030",
+                        "outline-variant": "#444748",
+                        "on-tertiary": "#313030",
+                        "on-secondary-fixed": "#241a00",
+                        "surface-variant": "#333535",
+                        "on-secondary-container": "#342800",
+                        "inverse-on-surface": "#2f3131",
+                        "surface-container-highest": "#333535",
+                        "surface-dim": "#121414",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#0a0a0a",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-background": "#e2e2e2",
+                        "surface-container-lowest": "#0c0f0f",
+                        "primary-fixed-dim": "#c9c6c5",
+                        "on-tertiary-container": "#7a7979",
+                        "tertiary-fixed": "#e5e2e1",
+                        "surface-container-low": "#1a1c1c",
+                        "inverse-primary": "#5f5e5e",
+                        "primary-fixed": "#e5e2e1",
+                        "secondary-fixed-dim": "#e9c349"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "80px",
+                        "gutter": "32px",
+                        "margin-mobile": "24px",
+                        "unit": "8px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Playfair Display"],
+                        "headline-xl-mobile": ["Playfair Display"],
+                        "headline-xl": ["Playfair Display"],
+                        "label-caps": ["Inter"],
+                        "display-lg": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "300" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600" }],
+                        "display-lg": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "display-lg-mobile": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #121414;
+            color: #e2e2e2;
+            overflow-x: hidden;
+        }
+        
+        .carousel-container {
+            perspective: 1500px;
+            transform-style: preserve-3d;
+        }
+        
+        .carousel-item {
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s ease, filter 0.8s ease;
+            transform-origin: center center;
+            will-change: transform, opacity, filter;
+        }
+
+        .carousel-item.active {
+            transform: translateX(0) scale(1) translateZ(0);
+            opacity: 1;
+            z-index: 10;
+            filter: grayscale(0%);
+            box-shadow: 0 0 40px rgba(233, 195, 73, 0.15);
+            border-color: #e9c349;
+        }
+
+        .carousel-item.prev {
+            transform: translateX(-40%) scale(0.85) translateZ(-100px) rotateY(15deg);
+            opacity: 0.5;
+            z-index: 5;
+            filter: grayscale(80%) blur(2px);
+            border-color: #1A1A1A;
+        }
+
+        .carousel-item.next {
+            transform: translateX(40%) scale(0.85) translateZ(-100px) rotateY(-15deg);
+            opacity: 0.5;
+            z-index: 5;
+            filter: grayscale(80%) blur(2px);
+            border-color: #1A1A1A;
+        }
+        
+        .glow-overlay {
+            background: radial-gradient(circle at top, rgba(233, 195, 73, 0.1) 0%, transparent 70%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- Top Navigation (Web) -->
+<nav class="hidden md:flex fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 flex justify-between items-center px-margin-desktop py-6 transition-opacity duration-700 ease-in-out">
+<div class="font-headline-md text-headline-md text-secondary tracking-[0.2em] uppercase">VANTIS</div>
+<div class="flex gap-8 font-body-md text-body-md tracking-widest">
+<a class="text-secondary border-b border-secondary pb-1" href="#">Collections</a>
+<a class="text-on-surface hover:text-secondary transition-colors duration-500" href="#">Bespoke</a>
+<a class="text-on-surface hover:text-secondary transition-colors duration-500" href="#">Heritage</a>
+<a class="text-on-surface hover:text-secondary transition-colors duration-500" href="#">Concierge</a>
+</div>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-on-surface hover:text-secondary transition-all duration-300 cursor-pointer">shopping_bag</span>
+<span class="material-symbols-outlined text-on-surface hover:text-secondary transition-all duration-300 cursor-pointer">person</span>
+</div>
+</nav>
+<!-- Side Navigation (Mobile) - Representing main destinations -->
+<nav class="md:hidden fixed left-0 h-screen w-20 bg-surface-container-lowest dark:bg-surface-container-lowest border-r border-secondary/10 flex flex-col justify-between py-8 z-50 shadow-[5px_0px_30px_rgba(233,195,73,0.05)]">
+<div class="flex flex-col items-center gap-8">
+<div class="font-headline-xl-mobile text-headline-xl-mobile text-secondary rotate-90 whitespace-nowrap mb-8 tracking-widest uppercase">VANTIS</div>
+<a class="flex flex-col items-center gap-2 text-secondary p-4 bg-secondary/5 border-r-2 border-secondary w-full group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">watch</span>
+</a>
+<a class="flex flex-col items-center gap-2 text-on-surface-variant hover:text-secondary p-4 w-full group hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">water_drop</span>
+</a>
+<a class="flex flex-col items-center gap-2 text-on-surface-variant hover:text-secondary p-4 w-full group hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">diamond</span>
+</a>
+</div>
+<div class="flex flex-col items-center gap-6">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer">settings</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer">contact_support</span>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-grow flex items-center justify-center pt-24 md:pt-0 relative overflow-hidden pl-0 md:pl-0 pl-20" id="main-content">
+<!-- Ambient Background -->
+<div class="absolute inset-0 bg-gradient-to-b from-primary-container via-background to-surface-container-lowest z-0 pointer-events-none"></div>
+<div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px] mix-blend-screen pointer-events-none"></div>
+<div class="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[150px] mix-blend-screen pointer-events-none"></div>
+<div class="container mx-auto px-gutter max-w-container-max relative z-10 w-full h-[819px] flex flex-col justify-center">
+<div class="text-center mb-16 opacity-0 translate-y-8 animate-[fade-in-up_1s_ease-out_forwards]">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-secondary mb-4 drop-shadow-[0_0_15px_rgba(233,195,73,0.3)]">Collections</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto uppercase tracking-[0.3em]">Masterpieces of precision &amp; elegance</p>
+</div>
+<!-- 3D Carousel -->
+<div class="carousel-container relative w-full h-[500px] md:h-[600px] flex items-center justify-center">
+<!-- Watches -->
+<div class="carousel-item active absolute w-[80%] md:w-[45%] h-full max-w-[500px] rounded-xl overflow-hidden border border-secondary bg-surface-container group cursor-pointer" data-index="0">
+<div class="absolute inset-0 glow-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<img alt="Watches Collection" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:mix-blend-normal group-hover:opacity-100 transition-all duration-700" data-alt="A highly detailed close-up of a luxury mechanical watch resting on dark, textured slate. The lighting is cinematic, casting deep shadows that highlight the intricate gold and silver gears and the polished bezel. The aesthetic is ultra-premium, dark mode, with a minimalist composition focusing entirely on the craftsmanship. A subtle warm glow emanates from the gold components." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAibgYmHOQMMG-l9MijDpNR6f7n4YuPTT1R71pO_mW5RFsFZtdgPAOPlWMyvJU47-dB68vyWPVR8jFL3rs1oaze7xXEgqRk5uxLiaqZpXJ1LvJS5dF8QHLG0L5CFuUM3hScDkfs7RfxqhFlDqbg-YPyBXh9FgPeU_iBVlpRSYldKrOha-IPO2nWHchRnH0XOjhirNZC75xJoejX6k0TPwekYxg3CgBZkSp57gockG6qFfACm13FAqxBSRzJWaExzvu51B2jIiBoVhw"/>
+<div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-primary-container to-transparent z-20">
+<div class="flex items-center gap-4 mb-2">
+<span class="material-symbols-outlined text-secondary">watch</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-[0.2em]">01</span>
+</div>
+<h2 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-4">Watches</h2>
+<button class="font-label-caps text-label-caps text-secondary border-b border-secondary pb-1 hover:text-white hover:border-white transition-colors uppercase tracking-[0.2em]">Explore</button>
+</div>
+</div>
+<!-- Perfumes -->
+<div class="carousel-item next absolute w-[80%] md:w-[45%] h-full max-w-[500px] rounded-xl overflow-hidden border border-charcoal bg-surface-container group cursor-pointer" data-index="1">
+<div class="absolute inset-0 glow-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<img alt="Perfumes Collection" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:mix-blend-normal group-hover:opacity-100 transition-all duration-700" data-alt="A sleek, minimalist glass perfume bottle standing on a black reflective pedestal in a stark, dimly lit room. A single spotlight from above illuminates the amber liquid inside, creating a glowing effect. The surrounding environment is pure black, emphasizing luxury, exclusivity, and modern cinematic styling. A thin gold line catches the light on the bottle's cap." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3HAdCtN_HwZb6ZA_DNG2gXBNj99RcSIOW3uyqbQGhRG5MYI7jySTrdkvpHBnskV-yBP2hy0RUFmTNOBlriyjxDP6JAOGGb9a0TJQcKi28kiCsufoPaBzfVIjsTa8db5hd6tIOXvNrpY-tne_81L69z_4stxRrxhuDDxKp8oaSJ6wIRwm31CiT95P4xj3ABikbh6zRqYAQP7nIAPkUoIcMqzcZE1uRnWdNXLEJzrbkZ9tkmTxkBWIMX3y61HFzBt-NdQdBQDeTCYc"/>
+<div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-primary-container to-transparent z-20">
+<div class="flex items-center gap-4 mb-2">
+<span class="material-symbols-outlined text-secondary">water_drop</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-[0.2em]">02</span>
+</div>
+<h2 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-4">Perfumes</h2>
+<button class="font-label-caps text-label-caps text-secondary border-b border-secondary pb-1 hover:text-white hover:border-white transition-colors uppercase tracking-[0.2em]">Explore</button>
+</div>
+</div>
+<!-- Jewelry -->
+<div class="carousel-item prev absolute w-[80%] md:w-[45%] h-full max-w-[500px] rounded-xl overflow-hidden border border-charcoal bg-surface-container group cursor-pointer" data-index="2">
+<div class="absolute inset-0 glow-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<img alt="Jewelry Collection" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:mix-blend-normal group-hover:opacity-100 transition-all duration-700" data-alt="A delicate, high-end diamond and gold necklace displayed elegantly on a smooth black velvet bust. The lighting is highly controlled and cinematic, isolating the jewelry against a deep, dark void. Tiny sparks of light reflect off the diamonds. The overall aesthetic is ultra-luxurious, minimalist, and dramatic, fitting for a premium dark mode interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBunUKsnD_1auh2Um0aVaX-zKXwm3WGBOIqu7k1_UGL9-FLQgJGCO377BNkLsZwOJqxFHCzd-E5XZj7pfhEkOX2jf5ULNvcb3GKWl3lgQ2Od7FknlUZmtbAiykfU_J8I38eHI7_6egQ32qETXkSQkcK_V8xkZcu6itx-0dK9GWxJNPGF5Qz1kV6iFER3sMX6QKEGOyXBQeWE0-Ew-5MSpZMlaD-sfm04lCfsB9uDNUT5GR6acB7jG54yvSlxFIQtBwvN8xvIkWUSM"/>
+<div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-primary-container to-transparent z-20">
+<div class="flex items-center gap-4 mb-2">
+<span class="material-symbols-outlined text-secondary">diamond</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-[0.2em]">03</span>
+</div>
+<h2 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-4">Jewelry</h2>
+<button class="font-label-caps text-label-caps text-secondary border-b border-secondary pb-1 hover:text-white hover:border-white transition-colors uppercase tracking-[0.2em]">Explore</button>
+</div>
+</div>
+</div>
+<!-- Controls -->
+<div class="flex justify-center items-center gap-8 mt-12 z-20">
+<button class="w-12 h-12 rounded-full border border-outline flex items-center justify-center text-on-surface hover:border-secondary hover:text-secondary hover:shadow-[0_0_15px_rgba(233,195,73,0.3)] transition-all bg-surface-container" id="prevBtn">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex gap-3">
+<div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(233,195,73,0.8)] indicator" data-index="0"></div>
+<div class="w-2 h-2 rounded-full bg-outline indicator" data-index="1"></div>
+<div class="w-2 h-2 rounded-full bg-outline indicator" data-index="2"></div>
+</div>
+<button class="w-12 h-12 rounded-full border border-outline flex items-center justify-center text-on-surface hover:border-secondary hover:text-secondary hover:shadow-[0_0_15px_rgba(233,195,73,0.3)] transition-all bg-surface-container" id="nextBtn">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<style>
+        @keyframes fade-in-up {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const items = document.querySelectorAll('.carousel-item');
+            const indicators = document.querySelectorAll('.indicator');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                items.forEach((item, index) => {
+                    item.className = 'carousel-item absolute w-[80%] md:w-[45%] h-full max-w-[500px] rounded-xl overflow-hidden border bg-surface-container group cursor-pointer';
+                    
+                    if (index === currentIndex) {
+                        item.classList.add('active');
+                    } else if (index === (currentIndex - 1 + items.length) % items.length) {
+                        item.classList.add('prev');
+                    } else if (index === (currentIndex + 1) % items.length) {
+                        item.classList.add('next');
+                    } else {
+                        // Hide others if more than 3
+                        item.style.opacity = '0';
+                        item.style.pointerEvents = 'none';
+                    }
+                });
+
+                indicators.forEach((ind, index) => {
+                    if(index === currentIndex) {
+                        ind.classList.remove('bg-outline');
+                        ind.classList.add('bg-secondary', 'shadow-[0_0_8px_rgba(233,195,73,0.8)]');
+                    } else {
+                        ind.classList.remove('bg-secondary', 'shadow-[0_0_8px_rgba(233,195,73,0.8)]');
+                        ind.classList.add('bg-outline');
+                    }
+                });
+            }
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % items.length;
+                updateCarousel();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + items.length) % items.length;
+                updateCarousel();
+            });
+
+            // Click on items to bring to center
+            items.forEach(item => {
+                item.addEventListener('click', function() {
+                    if(!this.classList.contains('active')) {
+                        currentIndex = parseInt(this.getAttribute('data-index'));
+                        updateCarousel();
+                    }
+                });
+            });
+
+            // Swipe functionality for mobile
+            let touchstartX = 0;
+            let touchendX = 0;
+            const slider = document.querySelector('.carousel-container');
+
+            function handleGesture() {
+                if (touchendX < touchstartX - 50) {
+                    // Swipe Left
+                    currentIndex = (currentIndex + 1) % items.length;
+                    updateCarousel();
+                }
+                
+                if (touchendX > touchstartX + 50) {
+                    // Swipe Right
+                    currentIndex = (currentIndex - 1 + items.length) % items.length;
+                    updateCarousel();
+                }
+            }
+
+            slider.addEventListener('touchstart', e => {
+                touchstartX = e.changedTouches[0].screenX;
+            });
+
+            slider.addEventListener('touchend', e => {
+                touchendX = e.changedTouches[0].screenX;
+                handleGesture();
+            });
+        });
+    </script>
+</body></html>

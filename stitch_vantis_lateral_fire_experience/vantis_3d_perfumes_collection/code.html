@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vantis | Olfactory Collection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#474646",
+                        "surface-container-low": "#1a1c1c",
+                        "secondary-container": "#af8d11",
+                        "on-primary-fixed": "#1c1b1b",
+                        "surface-container-highest": "#333535",
+                        "on-background": "#e2e2e2",
+                        "surface-container-lowest": "#0c0f0f",
+                        "on-tertiary-container": "#7a7979",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#241a00",
+                        "on-secondary-fixed-variant": "#574500",
+                        "outline-variant": "#444748",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "surface-container": "#1e2020",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-secondary-container": "#342800",
+                        "surface": "#121414",
+                        "secondary-fixed-dim": "#e9c349",
+                        "primary-container": "#0a0a0a",
+                        "surface-container-high": "#282a2b",
+                        "primary-fixed": "#e5e2e1",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "outline": "#8e9192",
+                        "on-surface": "#e2e2e2",
+                        "inverse-on-surface": "#2f3131",
+                        "surface-tint": "#c9c6c5",
+                        "surface-bright": "#37393a",
+                        "on-surface-variant": "#c4c7c7",
+                        "tertiary-container": "#0a0a0a",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#e5e2e1",
+                        "inverse-surface": "#e2e2e2",
+                        "primary-fixed-dim": "#c9c6c5",
+                        "inverse-primary": "#5f5e5e",
+                        "secondary": "#e9c349",
+                        "primary": "#c9c6c5",
+                        "on-secondary": "#3c2f00",
+                        "surface-dim": "#121414",
+                        "surface-variant": "#333535",
+                        "on-tertiary": "#313030",
+                        "on-primary": "#313030",
+                        "tertiary": "#c8c6c5",
+                        "on-primary-container": "#7b7979",
+                        "background": "#121414",
+                        "secondary-fixed": "#ffe088",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "80px",
+                        "gutter": "32px",
+                        "container-max": "1440px",
+                        "unit": "8px",
+                        "margin-mobile": "24px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "headline-xl": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "body-md": ["Inter"],
+                        "headline-xl-mobile": ["Playfair Display"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "display-lg": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "display-lg-mobile": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "300" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0a0a0a;
+            color: #e2e2e2;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+        
+        .carousel-container {
+            width: 100%;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .carousel-item {
+            position: absolute;
+            width: 300px;
+            height: 400px;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease, filter 0.8s ease;
+            cursor: pointer;
+            display: flex;
+            flex-col justify-center;
+            align-items: center;
+            transform-origin: center center;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.8));
+            transition: filter 0.5s ease;
+        }
+
+        .carousel-item:hover img {
+            filter: drop-shadow(0px 20px 40px rgba(233,195,73,0.15));
+        }
+        
+        .carousel-title {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .carousel-item.active .carousel-title {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.3s;
+        }
+
+        .glass-nav {
+            background: rgba(18, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .glow-hover:hover {
+            text-shadow: 0 0 10px rgba(233, 195, 73, 0.5);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased selection:bg-secondary selection:text-on-secondary">
+<!-- TopNavBar -->
+<nav class="glass-nav fixed top-0 w-full z-[100] border-b border-outline-variant/30 transition-opacity duration-700 ease-in-out">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-6">
+<div class="hidden md:flex gap-8">
+<a class="text-secondary border-b border-secondary pb-1 font-label-caps text-label-caps transition-all duration-300" href="#">Collections</a>
+<a class="text-on-surface hover:text-secondary transition-colors duration-500 font-label-caps text-label-caps glow-hover" href="#">Bespoke</a>
+<a class="text-on-surface hover:text-secondary transition-colors duration-500 font-label-caps text-label-caps glow-hover" href="#">Heritage</a>
+<a class="text-on-surface hover:text-secondary transition-colors duration-500 font-label-caps text-label-caps glow-hover" href="#">Concierge</a>
+</div>
+<a class="font-headline-md text-headline-md text-secondary tracking-[0.2em] uppercase absolute left-1/2 transform -translate-x-1/2" href="#">
+                VANTIS
+            </a>
+<div class="flex gap-6 items-center ml-auto">
+<button class="text-on-surface hover:text-secondary transition-colors duration-500">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+<button class="text-on-surface hover:text-secondary transition-colors duration-500">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col h-full py-8 justify-between fixed left-0 h-screen w-20 hover:w-64 transition-all duration-500 z-50 bg-surface-container-lowest dark:bg-surface-container-lowest border-r border-secondary/10 shadow-[5px_0px_30px_rgba(233,195,73,0.05)] group overflow-hidden">
+<div class="flex flex-col items-center group-hover:items-start group-hover:px-6 w-full gap-12 mt-24 transition-all duration-300">
+<div class="w-full">
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-secondary p-4 w-full hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">watch</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300">Watches</span>
+</a>
+<a class="flex items-center gap-4 text-secondary bg-secondary/5 border-r-2 border-secondary p-4 w-full hover:bg-surface-container-high transition-all rounded-lg mt-2" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">water_drop</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300">Perfumes</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-secondary p-4 w-full hover:bg-surface-container-high transition-all rounded-lg mt-2" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">diamond</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300">Jewelry</span>
+</a>
+</div>
+</div>
+<div class="flex flex-col items-center group-hover:items-start group-hover:px-6 w-full gap-4 transition-all duration-300 mb-8">
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-secondary p-4 w-full hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">settings</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300">Settings</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-secondary p-4 w-full hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">contact_support</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="min-h-screen pt-32 pb-24 md:pl-20 flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Background Lighting Effect -->
+<div class="absolute inset-0 z-0 pointer-events-none flex justify-center items-center">
+<div class="w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[150px]"></div>
+</div>
+<div class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
+<!-- Header Section -->
+<div class="text-center mb-16 flex flex-col items-center">
+<a class="flex items-center gap-2 text-on-surface-variant hover:text-secondary font-label-caps text-label-caps mb-8 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                    BACK TO COLLECTIONS
+                </a>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-secondary mb-6 tracking-tight">
+                    Olfactory
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl text-center font-light">
+                    A collection of rare essences designed to evoke the sublime and the eternal.
+                </p>
+</div>
+<!-- 3D Carousel Section -->
+<div class="carousel-container my-20" id="perfumeCarousel">
+<!-- Product 1 -->
+<div class="carousel-item" data-index="0">
+<img alt="Ambre Lumière" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMGslJ7h0FnDiDcezzDRH3d9wPrzB3zfnLsa6ixn641w9GHrRtE5nNodyIcKccH1GMgh5nAH9WNwxc89OK4-Onj7FWdlA5Yz6mfH2H8GoCMfDnbmnrBb1hjJFZAxJsO6qggVu3DNcS2fgaozW8Tt2739nfrUrdcAqduLu15Xs8amjPbChWntEpkjquuIzo6Y_Vt9OgO2REmnqVU--k3IC5UldWMVys6JztLE11VFfbSDu-NUIRN-3ZVqn7MW3prT9mFggGNqX5JVg"/>
+<div class="carousel-title">
+<h3 class="font-headline-md text-headline-md text-secondary mb-2">Ambre Lumière</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Extrait de Parfum</p>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="carousel-item" data-index="1">
+<img alt="Obsidian Oud" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsG8L-IyX117b4DpIR76RclhJuI6BJd19aGRK8acr-vbZMNjuxkaV5VfCttCBIX227qObBa-qwKn660ATseCj3iWgEdi4TUG-ffpglaApddrLs4357Z4ldp4CCZkWHVu3sw4nMV6gLVCxu9UGBO6ksDOExWlPT6JrY_oGz3TqIKjkc7CPTPoLvoe4NTfCPwQ1QS-5nckEVpiysAzuKJ9v6sieggyYXSHn-JNb9wlIco0_4EFUkebzmyruvEiXwTEnYJ4qkgZjP7zM"/>
+<div class="carousel-title">
+<h3 class="font-headline-md text-headline-md text-secondary mb-2">Obsidian Oud</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Extrait de Parfum</p>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="carousel-item" data-index="2">
+<img alt="Celestial Bloom" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUOFHbvWJqfZT_v5F4y8fEfnB0-2dd65SdCDIdr1KVFumVpGbn1bM17txwtiHEKjB6ZOXqRj6eTn1noMmGMIJUqkteQF0DPSneltSF4wQoR_BsMpwOa19v99iECQkpfF_7_hlAoQX7iEfQiV6WnOQoVn-Bn1_z8nSz5HIUIxz2Dl30MKJRWv8QlMMNBoIHcyDipaDvShu0e9l-X-W5WGNkeE_Hb3hUtUuGVmMNhjgrupwcPvdrA5r5iEut07fTvnkMYby8uLb_zOo"/>
+<div class="carousel-title">
+<h3 class="font-headline-md text-headline-md text-secondary mb-2">Celestial Bloom</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Extrait de Parfum</p>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="carousel-item" data-index="3">
+<img alt="Nocturnal Iris" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6TuiIlgNe4CVIa5CAMtTwtu4YtNE9UvMksldf9tuIG0CptTxw2UOIbrTJhMVq85-MKplDeimO5gOH5yb7ANWQ_EP_i0pQygWaOrtiyhMk1i9BBv4fUdshsssNjM_Ld3u10iWmJSWAPzWzuXvWgM17oNm7zp93rxsgUCo1Zku3AOd7NB-aiTSuhdjMZEDcZGMi7_vQPTH_vbXm8r5D1H8Z8D9DPWl4Q1Kr5QGHjbFLngH0sf8qNwZmDg1VGuOjHohobLJQYDJnfT8"/>
+<div class="carousel-title">
+<h3 class="font-headline-md text-headline-md text-secondary mb-2">Nocturnal Iris</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Extrait de Parfum</p>
+</div>
+</div>
+<!-- Product 5 -->
+<div class="carousel-item" data-index="4">
+<img alt="Marbre Noir" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKedocR1wo4oq4_sytgOh_5-ptTwY6uX-9a_31ueNccTLbPDVWF_i-GjhGcqYbhpx0XlpSB-mEW-LUMfCc5i2q5JAkpxjqO0eMwbE0QtRUtd-a__why9fj2jmNNxj8RKxKySzdmO1RoS_WWPSeKwS6H1snKYeRmoPwa_7FLaDBjI0LfDHsvv-AEzP41AOugONIhUvKddBUbShjd1EECQ9uMUukp0JTOaiLstDDIyzQh5-QUQhgGyJcn0mmolI0jjfJjGV0TVEV5c0"/>
+<div class="carousel-title">
+<h3 class="font-headline-md text-headline-md text-secondary mb-2">Marbre Noir</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Extrait de Parfum</p>
+</div>
+</div>
+</div>
+<!-- Carousel Controls -->
+<div class="flex justify-center gap-8 mt-12 items-center">
+<button class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface hover:border-secondary hover:text-secondary transition-all duration-300" id="prevBtn">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex gap-3" id="carouselIndicators">
+<button class="w-2 h-2 rounded-full bg-secondary transition-all duration-300 indicator"></button>
+<button class="w-2 h-2 rounded-full bg-surface-variant hover:bg-outline transition-all duration-300 indicator"></button>
+<button class="w-2 h-2 rounded-full bg-surface-variant hover:bg-outline transition-all duration-300 indicator"></button>
+<button class="w-2 h-2 rounded-full bg-surface-variant hover:bg-outline transition-all duration-300 indicator"></button>
+<button class="w-2 h-2 rounded-full bg-surface-variant hover:bg-outline transition-all duration-300 indicator"></button>
+</div>
+<button class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface hover:border-secondary hover:text-secondary transition-all duration-300" id="nextBtn">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<!-- Discovery CTA -->
+<div class="flex justify-center mt-20">
+<button class="px-12 py-4 bg-primary-container border border-secondary text-on-surface font-label-caps text-label-caps hover:bg-secondary/10 transition-all duration-500 shadow-[0_0_15px_rgba(233,195,73,0.1)] hover:shadow-[0_0_25px_rgba(233,195,73,0.2)]">
+                    DISCOVER THE ESSENCE
+                </button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/20 flex flex-col items-center justify-center gap-6 px-margin-mobile md:px-margin-desktop md:pl-20 transition-all duration-500 relative z-20">
+<h2 class="font-headline-md text-headline-md text-secondary">VANTIS</h2>
+<div class="flex gap-8 flex-wrap justify-center">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline-offset-8 transition-all duration-500" href="#">Privacy Policy</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline-offset-8 transition-all duration-500" href="#">Terms of Service</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline-offset-8 transition-all duration-500" href="#">Shipping &amp; Returns</a>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant/50 mt-4">
+            © 2024 VANTIS LUXURY. ALL RIGHTS RESERVED.
+        </p>
+</footer>
+<!-- Carousel Logic -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const items = document.querySelectorAll('.carousel-item');
+            const indicators = document.querySelectorAll('.indicator');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            let currentIndex = 2; // Start middle
+            const totalItems = items.length;
+
+            function updateCarousel() {
+                items.forEach((item, index) => {
+                    item.classList.remove('active');
+                    
+                    // Calculate relative position (-2, -1, 0, 1, 2)
+                    let offset = index - currentIndex;
+                    
+                    // Handle infinite loop logic
+                    if (offset < -Math.floor(totalItems/2)) offset += totalItems;
+                    if (offset > Math.floor(totalItems/2)) offset -= totalItems;
+
+                    // Apply transforms based on offset
+                    if (offset === 0) {
+                        // Center item
+                        item.style.transform = 'translateX(0) scale(1) translateZ(100px)';
+                        item.style.opacity = '1';
+                        item.style.zIndex = '10';
+                        item.classList.add('active');
+                        item.style.filter = 'brightness(1)';
+                    } else if (offset === -1 || offset === 1) {
+                        // Adjacent items
+                        const sign = Math.sign(offset);
+                        item.style.transform = `translateX(${sign * 250}px) scale(0.7) translateZ(0px) rotateY(${-sign * 25}deg)`;
+                        item.style.opacity = '0.6';
+                        item.style.zIndex = '5';
+                        item.style.filter = 'brightness(0.5)';
+                    } else {
+                        // Far items
+                        const sign = Math.sign(offset);
+                        item.style.transform = `translateX(${sign * 400}px) scale(0.5) translateZ(-100px) rotateY(${-sign * 45}deg)`;
+                        item.style.opacity = '0.2';
+                        item.style.zIndex = '1';
+                        item.style.filter = 'brightness(0.2)';
+                    }
+                });
+
+                // Update indicators
+                indicators.forEach((ind, i) => {
+                    if (i === currentIndex) {
+                        ind.classList.remove('bg-surface-variant');
+                        ind.classList.add('bg-secondary');
+                    } else {
+                        ind.classList.add('bg-surface-variant');
+                        ind.classList.remove('bg-secondary');
+                    }
+                });
+            }
+
+            function goNext() {
+                currentIndex = (currentIndex + 1) % totalItems;
+                updateCarousel();
+            }
+
+            function goPrev() {
+                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                updateCarousel();
+            }
+
+            nextBtn.addEventListener('click', goNext);
+            prevBtn.addEventListener('click', goPrev);
+
+            items.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    if (currentIndex !== index) {
+                        currentIndex = index;
+                        updateCarousel();
+                    }
+                });
+            });
+
+            indicators.forEach((ind, index) => {
+                ind.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                });
+            });
+
+            // Initial setup
+            updateCarousel();
+            
+            // Auto rotate (optional, commented out for manual control preference in luxury UI)
+            // setInterval(goNext, 5000);
+        });
+    </script>
+</body></html>

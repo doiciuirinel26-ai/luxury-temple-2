@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jewelry - The Obsidian Collection | VANTIS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;family=Playfair+Display:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-high": "#282a2b",
+                      "secondary": "#e9c349",
+                      "on-secondary-container": "#342800",
+                      "surface-container-low": "#1a1c1c",
+                      "surface-container-highest": "#333535",
+                      "on-tertiary": "#313030",
+                      "inverse-on-surface": "#2f3131",
+                      "on-tertiary-fixed-variant": "#474746",
+                      "inverse-surface": "#e2e2e2",
+                      "on-background": "#e2e2e2",
+                      "primary-fixed": "#e5e2e1",
+                      "on-surface": "#e2e2e2",
+                      "on-error": "#690005",
+                      "secondary-fixed-dim": "#e9c349",
+                      "error-container": "#93000a",
+                      "primary-container": "#0a0a0a",
+                      "on-secondary-fixed-variant": "#574500",
+                      "inverse-primary": "#5f5e5e",
+                      "tertiary-container": "#0a0a0a",
+                      "outline": "#8e9192",
+                      "surface-dim": "#121414",
+                      "surface-container": "#1e2020",
+                      "background": "#121414",
+                      "surface-tint": "#c9c6c5",
+                      "on-primary-container": "#7b7979",
+                      "on-primary-fixed": "#1c1b1b",
+                      "on-error-container": "#ffdad6",
+                      "tertiary": "#c8c6c5",
+                      "on-surface-variant": "#c4c7c7",
+                      "surface-bright": "#37393a",
+                      "secondary-container": "#af8d11",
+                      "tertiary-fixed-dim": "#c8c6c5",
+                      "surface-variant": "#333535",
+                      "surface-container-lowest": "#0c0f0f",
+                      "on-primary": "#313030",
+                      "on-primary-fixed-variant": "#474646",
+                      "on-tertiary-container": "#7a7979",
+                      "tertiary-fixed": "#e5e2e1",
+                      "secondary-fixed": "#ffe088",
+                      "surface": "#121414",
+                      "error": "#ffb4ab",
+                      "outline-variant": "#444748",
+                      "on-tertiary-fixed": "#1c1b1b",
+                      "primary": "#c9c6c5",
+                      "on-secondary": "#3c2f00",
+                      "primary-fixed-dim": "#c9c6c5",
+                      "on-secondary-fixed": "#241a00"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "margin-desktop": "80px",
+                      "container-max": "1440px",
+                      "gutter": "32px",
+                      "margin-mobile": "24px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "display-lg-mobile": ["Playfair Display"],
+                      "headline-xl-mobile": ["Playfair Display"],
+                      "headline-xl": ["Playfair Display"],
+                      "headline-md": ["Playfair Display"],
+                      "display-lg": ["Playfair Display"],
+                      "body-lg": ["Inter"],
+                      "label-caps": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                      "display-lg-mobile": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+                      "headline-xl-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                      "headline-xl": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                      "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                      "display-lg": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                      "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "300" }],
+                      "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600" }]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-surface');
+            overflow-x: hidden;
+        }
+
+        /* Particle effect styles */
+        .particle-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: theme('colors.secondary');
+            border-radius: 50%;
+            opacity: 0;
+            box-shadow: 0 0 8px theme('colors.secondary');
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes glowFlash {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            30% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(2.5);
+            }
+        }
+
+        .glow-flash {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(233,195,73,0.9) 0%, rgba(233,195,73,0.3) 40%, rgba(233,195,73,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 15;
+            mix-blend-mode: screen;
+        }
+        
+        .nav-glow:hover {
+            text-shadow: 0 0 15px rgba(233, 195, 73, 0.4);
+        }
+
+        /* 3D Carousel Styles */
+        .carousel-3d-container {
+            perspective: 1200px;
+            transform-style: preserve-3d;
+        }
+
+        .carousel-item-3d {
+            position: absolute;
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s ease, z-index 0.8s;
+            will-change: transform, opacity;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col relative selection:bg-secondary selection:text-primary-container">
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 transition-opacity duration-700 ease-in-out">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-6">
+<!-- Navigation Links (Hidden on mobile) -->
+<nav class="hidden md:flex gap-8">
+<a class="font-body-md text-body-md tracking-widest text-secondary border-b border-secondary pb-1 nav-glow" href="#">Collections</a>
+<a class="font-body-md text-body-md tracking-widest text-on-surface hover:text-secondary transition-colors duration-500 nav-glow" href="#">Bespoke</a>
+<a class="font-body-md text-body-md tracking-widest text-on-surface hover:text-secondary transition-colors duration-500 nav-glow" href="#">Heritage</a>
+<a class="font-body-md text-body-md tracking-widest text-on-surface hover:text-secondary transition-colors duration-500 nav-glow" href="#">Concierge</a>
+</nav>
+<!-- Brand Logo -->
+<a class="font-headline-md text-headline-md text-secondary tracking-[0.2em] uppercase absolute left-1/2 transform -translate-x-1/2" href="#">
+                VANTIS
+            </a>
+<!-- Trailing Icons -->
+<div class="flex gap-4">
+<button class="text-on-surface hover:text-secondary transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+<button class="text-on-surface hover:text-secondary transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Shared Component - Visible on Web) -->
+<aside class="hidden md:flex flex-col h-full py-8 justify-between fixed left-0 top-0 h-screen w-20 hover:w-64 transition-all duration-500 z-40 bg-surface-container-lowest dark:bg-surface-container-lowest border-r border-secondary/10 shadow-[5px_0px_30px_rgba(233,195,73,0.05)] group pt-24 overflow-hidden">
+<div class="flex flex-col gap-8 w-full px-4">
+<div class="flex items-center gap-4 text-on-surface-variant group-hover:text-on-surface transition-colors">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden flex-shrink-0 border border-secondary/20">
+<img alt="Vantis Private Member" class="w-full h-full object-cover" data-alt="A sophisticated black and white portrait of a man, conveying an aura of exclusivity and luxury, appropriate for a high-net-worth individual avatar. The lighting is dramatic and cinematic, fitting a dark mode premium aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtyBCInUiusMLaYJXYKyb_qat6_z-e3wEbjZR2suvt8awE9dFQv4QiJ4_QgwOB5a2rVaiJznMofKCqm-_MFy_ESrKe-l0wb7HichDuKTi_U5VY3o1f4eNAAXF6A2b01Y3oBiL2foh2BsSTOdO-bknOQUquVObprGccoksKugDHs8X7XhyXVopXmNlKoNZNs6YgsJNQY583ukv-zRygA-R1KbJ-l_fJx_W-_MPiP8CyiulCJ2t-WZqWZFnjcsW0lkeuoZDIaBbNsfw"/>
+</div>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-40 whitespace-nowrap">
+<div class="font-label-caps text-label-caps text-secondary">VANTIS</div>
+<div class="text-xs text-on-surface-variant truncate">The Obsidian Collection</div>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-8 w-full">
+<a class="flex items-center gap-4 p-3 rounded-lg text-on-surface-variant hover:text-secondary hover:bg-surface-container-high transition-all group-hover:translate-x-1 duration-300 w-full relative" href="#">
+<span class="material-symbols-outlined flex-shrink-0" data-icon="watch">watch</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-14 whitespace-nowrap">Watches</span>
+</a>
+<a class="flex items-center gap-4 p-3 rounded-lg text-on-surface-variant hover:text-secondary hover:bg-surface-container-high transition-all group-hover:translate-x-1 duration-300 w-full relative" href="#">
+<span class="material-symbols-outlined flex-shrink-0" data-icon="water_drop">water_drop</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-14 whitespace-nowrap">Perfumes</span>
+</a>
+<a class="flex items-center gap-4 p-3 rounded-lg text-secondary bg-secondary/5 border-r-2 border-secondary group-hover:translate-x-1 duration-300 w-full relative" href="#">
+<span class="material-symbols-outlined flex-shrink-0" data-icon="diamond">diamond</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-14 whitespace-nowrap">Jewelry</span>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4 w-full px-4 mb-8">
+<button class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-label-caps text-label-caps text-secondary border border-secondary/30 py-3 px-4 rounded hover:bg-secondary/10 whitespace-nowrap">
+                Request Private Viewing
+            </button>
+<div class="flex flex-col gap-2 w-full mt-4 border-t border-outline-variant/20 pt-4">
+<a class="flex items-center gap-4 p-2 text-on-surface-variant hover:text-secondary transition-all w-full relative" href="#">
+<span class="material-symbols-outlined flex-shrink-0 text-sm" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-10 whitespace-nowrap text-[10px]">Settings</span>
+</a>
+<a class="flex items-center gap-4 p-2 text-on-surface-variant hover:text-secondary transition-all w-full relative" href="#">
+<span class="material-symbols-outlined flex-shrink-0 text-sm" data-icon="contact_support">contact_support</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-10 whitespace-nowrap text-[10px]">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-32 pb-24 md:ml-20 flex flex-col relative overflow-hidden min-h-screen">
+<!-- Back Button -->
+<div class="absolute top-32 left-8 md:left-12 z-20">
+<a class="group flex items-center gap-2 text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined text-sm transition-transform group-hover:-translate-x-1" data-icon="arrow_back">arrow_back</span>
+<span class="font-label-caps text-label-caps uppercase tracking-widest border-b border-transparent group-hover:border-secondary transition-all">Back to Collections</span>
+</a>
+</div>
+<!-- Header Section -->
+<div class="text-center w-full px-4 mb-12 mt-16 md:mt-8 z-10">
+<h2 class="font-label-caps text-label-caps tracking-[0.3em] text-secondary mb-4 uppercase">Jewelry - The Obsidian Collection</h2>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-secondary mb-4 drop-shadow-[0_0_15px_rgba(233,195,73,0.1)]">Adornment</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto font-light">Rare gems and precious metals crafted into eternal masterpieces.</p>
+</div>
+<!-- 3D Carousel Section -->
+<div class="relative w-full flex-grow flex items-center justify-center overflow-hidden carousel-3d-container h-[600px] md:h-[700px]">
+<!-- Background Ambient Glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[614px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
+<!-- Item 1: The Eternal Bloom -->
+<div class="carousel-item-3d w-[75vw] md:w-[40vw] lg:w-[30vw] flex flex-col items-center group cursor-pointer">
+<div class="relative w-full aspect-[3/4] mb-8 rounded-lg overflow-hidden border border-surface-container-high transition-colors duration-500 shadow-2xl jewelry-card-inner">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10"></div>
+<img alt="The Eternal Bloom" class="w-full h-full object-cover transition-all duration-700 jewelry-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASWlfrwHTQ2vzxtaHRZf6IRqizFgaQWhFn-OVOlRdtT2dcCSMvmZQkDDGoDPoH2WedJuADk6rzcBOBJp98Y3nIlPdVFwHStjKZIKZJMMbmE2zjVB3DFilCx8_V930W-jsewJwHpMr6Rn3-D4DhQpMvEyTuEB2YNhjomcBczMK8w6DfHGLYk7afC4E1tP-9lDvly7tDXaDbvfxIj75mEHX5sh_Ic66FP7XtUiz5ewhgx5OwKdOAD2T4cJeo6hGeSP89F46IgTATgNw"/>
+<div class="particle-container"></div>
+</div>
+<div class="text-center z-20 jewelry-text transition-opacity duration-300 flex flex-col items-center w-full">
+<h2 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-2">The Eternal Bloom</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em] mb-4">Diamond Necklace</p>
+<button class="w-full py-3 px-6 rounded border border-secondary/30 font-label-caps text-label-caps text-on-surface hover:text-secondary hover:border-secondary hover:bg-secondary/10 uppercase tracking-[0.2em] bg-background mt-4 transition-all pointer-events-auto">
+                            Request Private Viewing
+                        </button>
+</div>
+</div>
+<!-- Item 2: Aurum Hoops -->
+<div class="carousel-item-3d w-[75vw] md:w-[40vw] lg:w-[30vw] flex flex-col items-center group cursor-pointer">
+<div class="relative w-full aspect-[3/4] mb-8 rounded-lg overflow-hidden border border-surface-container-high transition-colors duration-500 shadow-2xl jewelry-card-inner">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10"></div>
+<img alt="Aurum Hoops" class="w-full h-full object-cover transition-all duration-700 jewelry-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl9K0IpCNs0Ib3VUaf6vtgZLi3S_FBWyW2uBQxnXOBAeXodGcfRwZ7blJln420RDyyQmpcfPYi3f5XSe-TJsN2N1auSfsXfDreXCK7uySFLpsWNPZ2lK6aMY6DCJCtQs5X_kWsxyQKTIkU70pHw4btU94TwjEwSHWMWIvn1bmSrpb820fUnjmL4kqvRyJLgPmVEvwzNCrJGIG83hyQLJeRTOMpvYWxzcAF8Tcy4KX7lNvF02XVaD18Bb5KJYmPJksP94Xls4yIzv8"/>
+<div class="particle-container"></div>
+</div>
+<div class="text-center z-20 jewelry-text transition-opacity duration-300 flex flex-col items-center w-full">
+<h2 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-2">Aurum Hoops</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em] mb-4">Gold Earrings</p>
+<button class="w-full py-3 px-6 rounded border border-secondary/30 font-label-caps text-label-caps text-on-surface hover:text-secondary hover:border-secondary hover:bg-secondary/10 uppercase tracking-[0.2em] bg-background mt-4 transition-all pointer-events-auto">
+                            Request Private Viewing
+                        </button>
+</div>
+</div>
+<!-- Item 3: Obsidian Emerald -->
+<div class="carousel-item-3d w-[75vw] md:w-[40vw] lg:w-[30vw] flex flex-col items-center group cursor-pointer">
+<div class="relative w-full aspect-[3/4] mb-8 rounded-lg overflow-hidden border border-surface-container-high transition-colors duration-500 shadow-2xl jewelry-card-inner">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10"></div>
+<img alt="Obsidian Emerald" class="w-full h-full object-cover transition-all duration-700 jewelry-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP9ML1DY21OKa_dyo4-eXP0Kcpd5enZFI33JdKVI7pDEwsQr8-b6MHhfG4nQLwcI2auNdowLY04ZBl8Vs0b5CEWCXsXcC16hsKrLhZkRy0pjdbDPad2UkyS52NfUdNbfph0ZiXQ8IDx_xJLBIqs1Ayw14AtSiVBFCkFdgx-yIQMosSAi9Af85JTkXU-i5RxERjHYTp-FJtmwbDgQ25WcKpQsYSvlXt6uWBwTbx-XzBK408yNaxWbuETNGrnTOvp699ZvgBkw7Gq28"/>
+<div class="particle-container"></div>
+</div>
+<div class="text-center z-20 jewelry-text transition-opacity duration-300 flex flex-col items-center w-full">
+<h2 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-2">Obsidian Emerald</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em] mb-4">Emerald Ring</p>
+<button class="w-full py-3 px-6 rounded border border-secondary/30 font-label-caps text-label-caps text-on-surface hover:text-secondary hover:border-secondary hover:bg-secondary/10 uppercase tracking-[0.2em] bg-background mt-4 transition-all pointer-events-auto">
+                            Request Private Viewing
+                        </button>
+</div>
+</div>
+<!-- Item 4: Azure Sapphire -->
+<div class="carousel-item-3d w-[75vw] md:w-[40vw] lg:w-[30vw] flex flex-col items-center group cursor-pointer">
+<div class="relative w-full aspect-[3/4] mb-8 rounded-lg overflow-hidden border border-surface-container-high transition-colors duration-500 shadow-2xl jewelry-card-inner">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10"></div>
+<img alt="Azure Sapphire" class="w-full h-full object-cover transition-all duration-700 jewelry-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5bq2hB0K2gLmBmvhUtcYXZ3kLNSAqAkrtXJEMS2CfUf_c9s9__-ouh8ArDLq48D1qsLhYOqGtwb3gf7JQ-ldkBsqAbaA7IxRibx0uraTzKmayWVFAnmLzn22bYf0X0_3sXA0R0-h_YFqkldc5C0lUggAX4Kl_Gxhd0GD7qi3ZCvf51wz9v28eKQ1w98caUTQlx619G7E9_2Be6D5ds5_6pWmaK6jVXwzl8AdepwEPXIr57QDxa9ASxWDcn-rjWIx66klBw2kBiR8"/>
+<div class="particle-container"></div>
+</div>
+<div class="text-center z-20 jewelry-text transition-opacity duration-300 flex flex-col items-center w-full">
+<h2 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-2">Azure Sapphire</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em] mb-4">Sapphire Bracelet</p>
+<button class="w-full py-3 px-6 rounded border border-secondary/30 font-label-caps text-label-caps text-on-surface hover:text-secondary hover:border-secondary hover:bg-secondary/10 uppercase tracking-[0.2em] bg-background mt-4 transition-all pointer-events-auto">
+                            Request Private Viewing
+                        </button>
+</div>
+</div>
+<!-- Item 5: Tahitian Pearl -->
+<div class="carousel-item-3d w-[75vw] md:w-[40vw] lg:w-[30vw] flex flex-col items-center group cursor-pointer">
+<div class="relative w-full aspect-[3/4] mb-8 rounded-lg overflow-hidden border border-surface-container-high transition-colors duration-500 shadow-2xl jewelry-card-inner">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10"></div>
+<img alt="Tahitian Pearl" class="w-full h-full object-cover transition-all duration-700 jewelry-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCktSGA_TeBQHux-S-3Twkii9FnJqH8NuOSX8iS3_wWttS3K1u3iWR2fB8JluYNCeSgQwPu0J3NmoP79rV-yQWiFtgKfvcWTEjnaG66BhyhJYv0H5VSKYTjzOVIXIrlL5kAJ8U_oyHJreQ5ZVfPVMbQXUOCXMXkdCVgvDTt7ni71rgFvOA-_iWOIbuV0d-zDqDFmIgLMuhAXRxMwDo7zoQUsezD8qsRf11MEkZStodbeLgXSjDOnLjfy16SFVQTYwQREgJgdktMf6A"/>
+<div class="particle-container"></div>
+</div>
+<div class="text-center z-20 jewelry-text transition-opacity duration-300 flex flex-col items-center w-full">
+<h2 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-2">Tahitian Pearl</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em] mb-4">Pearl Brooch</p>
+<button class="w-full py-3 px-6 rounded border border-secondary/30 font-label-caps text-label-caps text-on-surface hover:text-secondary hover:border-secondary hover:bg-secondary/10 uppercase tracking-[0.2em] bg-background mt-4 transition-all pointer-events-auto">
+                            Request Private Viewing
+                        </button>
+</div>
+</div>
+<!-- Carousel Controls (Visual cues) -->
+<div class="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-4 z-30">
+<div class="w-12 h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary transition-all duration-500" id="carousel-progress-bar"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full py-12 bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/20 flex flex-col items-center justify-center gap-6 px-margin-desktop md:ml-20">
+<div class="font-headline-md text-headline-md text-secondary">VANTIS</div>
+<div class="flex gap-8">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline-offset-8 transition-all duration-500" href="#">Privacy Policy</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline-offset-8 transition-all duration-500" href="#">Terms of Service</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline-offset-8 transition-all duration-500" href="#">Shipping &amp; Returns</a>
+</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mt-4">
+            © 2024 VANTIS LUXURY. ALL RIGHTS RESERVED.
+        </div>
+</footer>
+<script>
+        // Explosion Effect Logic
+        function triggerExplosion(element) {
+            const container = element.querySelector('.particle-container');
+            if (!container) return;
+
+            // Clear previous particles and flashes
+            container.innerHTML = '';
+
+            // Create Glow Flash
+            const flash = document.createElement('div');
+            flash.classList.add('glow-flash');
+            flash.style.animation = 'glowFlash 0.7s ease-out forwards';
+            container.appendChild(flash);
+            
+            setTimeout(() => {
+                if (flash.parentNode) flash.remove();
+            }, 700);
+
+            // Create High-Fidelity Particles
+            const numParticles = 60;
+            const colors = ['#e9c349', '#ffe088', '#ffffff', '#ffb4ab'];
+
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Randomize properties for more organic feel
+                const size = Math.random() * 6 + 2; // 2px to 8px
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 60 + Math.random() * 220; // 60px to 280px distance
+                
+                const tx = Math.cos(angle) * velocity + 'px';
+                const ty = Math.sin(angle) * velocity + 'px';
+                
+                const duration = 0.5 + Math.random() * 0.7; // 0.5s to 1.2s
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.backgroundColor = color;
+                particle.style.boxShadow = `0 0 ${size * 2}px ${color}`;
+                particle.style.setProperty('--tx', tx);
+                particle.style.setProperty('--ty', ty);
+                particle.style.animation = `explode ${duration}s cubic-bezier(0.1, 0.8, 0.2, 1) forwards`;
+
+                container.appendChild(particle);
+                
+                // Clean up particle after animation
+                setTimeout(() => {
+                    if (particle.parentNode) particle.remove();
+                }, duration * 1000);
+            }
+        }
+
+        // 3D Carousel Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const items = document.querySelectorAll('.carousel-item-3d');
+            const progressBar = document.getElementById('carousel-progress-bar');
+            let activeIndex = 0;
+            const totalItems = items.length;
+
+            function updateCarousel() {
+                items.forEach((item, index) => {
+                    // Calculate shortest path offset for infinite loop
+                    let offset = (index - activeIndex) % totalItems;
+                    if (offset < -Math.floor(totalItems/2)) offset += totalItems;
+                    if (offset > Math.floor(totalItems/2)) offset -= totalItems;
+                    
+                    const absOffset = Math.abs(offset);
+                    const sign = Math.sign(offset);
+
+                    const img = item.querySelector('.jewelry-img');
+                    const text = item.querySelector('.jewelry-text');
+                    const innerCard = item.querySelector('.jewelry-card-inner');
+                    
+                    if (offset === 0) {
+                        // Active card
+                        item.style.transform = `translateX(0) translateZ(0) rotateY(0) scale(1)`;
+                        item.style.opacity = 1;
+                        item.style.zIndex = 20;
+                        item.classList.add('pointer-events-auto');
+                        
+                        // Active styling
+                        if (img) img.classList.remove('grayscale');
+                        if (innerCard) innerCard.classList.add('border-secondary');
+                        if (text) {
+                            text.style.opacity = 1;
+                            text.style.pointerEvents = 'auto';
+                        }
+
+                    } else {
+                        // Inactive cards
+                        // Adjust translation and rotation based on distance from center
+                        const tx = sign * (40 + absOffset * 10); // Percentage shift
+                        const tz = -150 * absOffset; // Push back in Z space
+                        const ry = sign * -35; // Rotate inwards
+                        const scale = 1 - (absOffset * 0.1);
+
+                        item.style.transform = `translateX(${tx}%) translateZ(${tz}px) rotateY(${ry}deg) scale(${scale})`;
+                        item.style.opacity = Math.max(1 - (absOffset * 0.4), 0);
+                        item.style.zIndex = 10 - absOffset;
+                        item.classList.remove('pointer-events-auto');
+                        
+                        // Inactive styling
+                        if (img) img.classList.add('grayscale');
+                        if (innerCard) innerCard.classList.remove('border-secondary');
+                        if (text) {
+                            text.style.opacity = 0;
+                            text.style.pointerEvents = 'none';
+                        }
+                    }
+                });
+
+                // Update Progress Bar
+                if (progressBar) {
+                    progressBar.style.width = `${((activeIndex + 1) / items.length) * 100}%`;
+                }
+            }
+
+            // Bind click events to navigate
+            items.forEach((item, index) => {
+                item.addEventListener('click', (e) => {
+                    // Prevent clicking the button from also triggering the card rotation if it's the active card
+                    if (activeIndex === index) return;
+                    
+                    activeIndex = index;
+                    updateCarousel();
+                    // Trigger explosion slightly after the animation starts
+                    setTimeout(() => {
+                        triggerExplosion(items[activeIndex]);
+                    }, 300);
+                });
+            });
+
+            // Initialize carousel
+            updateCarousel();
+            
+            // Trigger initial explosion
+            setTimeout(() => {
+                triggerExplosion(items[activeIndex]);
+            }, 800);
+        });
+
+    </script>
+</body></html>

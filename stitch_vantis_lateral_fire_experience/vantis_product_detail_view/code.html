@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VANTIS - The Obsidian Collection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#e9c349",
+                        "surface-container-high": "#282a2b",
+                        "surface-container": "#1e2020",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "primary-container": "#0a0a0a",
+                        "on-primary-fixed": "#1c1b1b",
+                        "inverse-surface": "#e2e2e2",
+                        "outline": "#8e9192",
+                        "surface": "#121414",
+                        "on-surface": "#e2e2e2",
+                        "primary": "#c9c6c5",
+                        "on-primary-container": "#7b7979",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "error-container": "#93000a",
+                        "secondary-container": "#af8d11",
+                        "surface-bright": "#37393a",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-error": "#690005",
+                        "surface-tint": "#c9c6c5",
+                        "background": "#121414",
+                        "secondary-fixed": "#ffe088",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-surface-variant": "#c4c7c7",
+                        "on-secondary": "#3c2f00",
+                        "tertiary": "#c8c6c5",
+                        "on-primary": "#313030",
+                        "outline-variant": "#444748",
+                        "on-tertiary": "#313030",
+                        "on-secondary-fixed": "#241a00",
+                        "surface-variant": "#333535",
+                        "on-secondary-container": "#342800",
+                        "inverse-on-surface": "#2f3131",
+                        "surface-container-highest": "#333535",
+                        "surface-dim": "#121414",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#0a0a0a",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-background": "#e2e2e2",
+                        "surface-container-lowest": "#0c0f0f",
+                        "primary-fixed-dim": "#c9c6c5",
+                        "on-tertiary-container": "#7a7979",
+                        "tertiary-fixed": "#e5e2e1",
+                        "surface-container-low": "#1a1c1c",
+                        "inverse-primary": "#5f5e5e",
+                        "primary-fixed": "#e5e2e1",
+                        "secondary-fixed-dim": "#e9c349"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "80px",
+                        "gutter": "32px",
+                        "margin-mobile": "24px",
+                        "unit": "8px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Playfair Display"],
+                        "headline-xl-mobile": ["Playfair Display"],
+                        "headline-xl": ["Playfair Display"],
+                        "label-caps": ["Inter"],
+                        "display-lg": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "300" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600" }],
+                        "display-lg": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "display-lg-mobile": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Lateral Fire Swipe Transition */
+        .swipe-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(90deg, #0a0a0a 0%, #1a1a1a 50%, #af8d11 95%, #e9c349 100%);
+            z-index: 9999;
+            transform-origin: right;
+            animation: swipeOut 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+
+        @keyframes swipeOut {
+            0% { transform: scaleX(1); }
+            100% { transform: scaleX(0); }
+        }
+
+        /* Subtle Glow Effects */
+        .glow-hover:hover {
+            box-shadow: 0 0 15px rgba(233, 195, 73, 0.15);
+            border-color: #e9c349;
+        }
+        
+        .img-desaturate {
+            filter: grayscale(80%);
+            transition: filter 0.7s ease;
+        }
+        .img-desaturate:hover {
+            filter: grayscale(0%);
+        }
+    </style>
+</head>
+<body class="bg-primary-container text-on-background antialiased overflow-x-hidden selection:bg-secondary selection:text-primary-container">
+<!-- Transition Overlay -->
+<div class="swipe-transition"></div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 transition-opacity duration-700 ease-in-out hidden md:flex">
+<div class="flex justify-between items-center w-full px-margin-desktop py-6">
+<div class="flex gap-8 items-center font-body-md text-body-md tracking-widest">
+<a class="text-secondary border-b border-secondary pb-1" href="#">Collections</a>
+<a class="text-on-surface hover:text-secondary transition-colors duration-500" href="#">Bespoke</a>
+<a class="text-on-surface hover:text-secondary transition-colors duration-500" href="#">Heritage</a>
+<a class="text-on-surface hover:text-secondary transition-colors duration-500" href="#">Concierge</a>
+</div>
+<div class="font-headline-md text-headline-md text-secondary tracking-[0.2em] uppercase cursor-pointer">
+                VANTIS
+            </div>
+<div class="flex gap-6 text-on-surface">
+<a class="hover:text-secondary transition-all duration-300" data-icon="shopping_bag" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+</a>
+<a class="hover:text-secondary transition-all duration-300" data-icon="person" href="#">
+<span class="material-symbols-outlined">person</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Mobile Nav Header -->
+<nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30 md:hidden flex justify-between items-center px-margin-mobile py-4">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+<div class="font-headline-xl-mobile text-headline-xl-mobile text-secondary tracking-[0.2em] uppercase">VANTIS</div>
+<span class="material-symbols-outlined text-on-surface">shopping_bag</span>
+</nav>
+<!-- Main Content -->
+<main class="pt-[100px] md:pt-[120px] pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto min-h-screen">
+<!-- Product Showcase Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center min-h-[819px]">
+<!-- Left: Imagery Gallery -->
+<div class="col-span-1 md:col-span-7 h-full flex flex-col gap-6">
+<!-- Main Feature Image -->
+<div class="relative w-full h-[614px] md:h-[768px] border border-[#1A1A1A] overflow-hidden group glow-hover transition-all duration-500">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10 opacity-60"></div>
+<img alt="Luxury Watch Showcase" class="w-full h-full object-cover img-desaturate scale-105 group-hover:scale-100 transition-transform duration-1000" data-alt="A macro, cinematic shot of an ultra-luxury mechanical watch against a pitch-black background. Soft, dramatic rim lighting catches the polished gold edges and intricate internal gears. The mood is silent, exclusive, and highly precise. High contrast, sharp focus, with subtle atmospheric depth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdOvuSXQBjKKRaVm-51b_rphB10L2cWGjD_GS0804r_DYF-XmW4_cyfyKsot_aDRyeoO20cx1uTwZBJ7X0vvLB6UInXzurfsTLlxirps3BCejRwBmINAivL2kRnCnzGXgzLhDQaixlAg64x6OjD7QCo9X9gorH9uY5cvkkZlB80t6GhfJVoI0yKvClEqIki1m7PwRHbeFCTTCMMEHng6NgxOZAbOdDN7t3y1_cA6rm-WFtEE4G-EoPOyFdQr-2on5idEPW-trUIGY"/>
+<div class="absolute bottom-6 left-6 z-20 flex gap-2">
+<div class="w-2 h-2 bg-secondary rounded-full"></div>
+<div class="w-2 h-2 border border-secondary rounded-full"></div>
+<div class="w-2 h-2 border border-secondary rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Right: Product Details -->
+<div class="col-span-1 md:col-span-5 flex flex-col justify-center h-full pl-0 md:pl-12 mt-8 md:mt-0">
+<div class="flex items-center gap-2 mb-4">
+<span class="w-8 h-[1px] bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-secondary tracking-widest uppercase">The Obsidian Collection</span>
+</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-2">
+                    Aethelgard
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-md">
+                    Forged in silence. A kinetic masterpiece encased in darkened titanium, featuring a floating tourbillon that defies gravity. Precision elevated to high art.
+                </p>
+<div class="flex items-baseline gap-4 mb-12">
+<span class="font-headline-md text-headline-md text-secondary">$145,000</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">USD</span>
+</div>
+<!-- CTA -->
+<button class="w-full md:w-auto px-12 py-5 bg-primary-container border border-secondary text-on-surface font-label-caps text-label-caps tracking-widest uppercase hover:bg-secondary hover:text-primary-container transition-all duration-500 flex items-center justify-center gap-4 group">
+                    Request Private Viewing
+                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<!-- Accents -->
+<div class="mt-16 pt-8 border-t border-[#1A1A1A] grid grid-cols-2 gap-8">
+<div>
+<span class="block font-label-caps text-label-caps text-on-surface-variant mb-2">Caliber</span>
+<span class="font-body-md text-body-md text-on-surface">V-902 Manual</span>
+</div>
+<div>
+<span class="block font-label-caps text-label-caps text-on-surface-variant mb-2">Reserve</span>
+<span class="font-body-md text-body-md text-on-surface">72 Hours</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/20 flex flex-col items-center justify-center gap-6 px-margin-desktop transition-all duration-500">
+<div class="font-headline-md text-headline-md text-secondary tracking-[0.2em] uppercase">VANTIS</div>
+<div class="flex gap-8 font-label-caps text-label-caps">
+<a class="text-on-surface-variant hover:text-secondary underline-offset-8 transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-secondary underline-offset-8 transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-secondary underline-offset-8 transition-colors" href="#">Shipping &amp; Returns</a>
+</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mt-4 opacity-50">
+            © 2024 VANTIS LUXURY. ALL RIGHTS RESERVED.
+        </div>
+</footer>
+<script>
+        // Optional subtle interaction for the image gallery
+        document.addEventListener('DOMContentLoaded', () => {
+            const swipeOverlay = document.querySelector('.swipe-transition');
+            setTimeout(() => {
+                swipeOverlay.style.display = 'none';
+            }, 1600);
+        });
+    </script>
+</body></html>

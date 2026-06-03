@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VANTIS - Watches Collection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;family=Playfair+Display:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#ffe088",
+                        "on-surface": "#e2e2e2",
+                        "error-container": "#93000a",
+                        "surface-variant": "#333535",
+                        "on-primary": "#313030",
+                        "primary-fixed": "#e5e2e1",
+                        "outline": "#8e9192",
+                        "on-secondary-container": "#342800",
+                        "inverse-primary": "#5f5e5e",
+                        "on-error-container": "#ffdad6",
+                        "inverse-on-surface": "#2f3131",
+                        "inverse-surface": "#e2e2e2",
+                        "surface-container": "#1e2020",
+                        "primary-container": "#0a0a0a",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-bright": "#37393a",
+                        "secondary": "#e9c349",
+                        "on-secondary": "#3c2f00",
+                        "background": "#121414",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "primary": "#c9c6c5",
+                        "outline-variant": "#444748",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-tertiary": "#313030",
+                        "tertiary": "#c8c6c5",
+                        "surface-container-lowest": "#0c0f0f",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-container": "#0a0a0a",
+                        "primary-fixed-dim": "#c9c6c5",
+                        "on-primary-fixed": "#1c1b1b",
+                        "surface-container-high": "#282a2b",
+                        "surface-tint": "#c9c6c5",
+                        "surface": "#121414",
+                        "surface-container-low": "#1a1c1c",
+                        "on-surface-variant": "#c4c7c7",
+                        "secondary-container": "#af8d11",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-primary-container": "#7b7979",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#e5e2e1",
+                        "surface-container-highest": "#333535",
+                        "on-primary-fixed-variant": "#474646",
+                        "surface-dim": "#121414",
+                        "on-tertiary-container": "#7a7979",
+                        "on-background": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "margin-desktop": "80px",
+                        "unit": "8px",
+                        "margin-mobile": "24px",
+                        "gutter": "32px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Playfair Display"],
+                        "body-md": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-xl-mobile": ["Playfair Display"],
+                        "headline-xl": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "300" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+                        "display-lg": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-surface');
+            overflow-x: hidden;
+        }
+
+        /* Particle effect styles */
+        .particle-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: theme('colors.secondary');
+            border-radius: 50%;
+            opacity: 0;
+            box-shadow: 0 0 8px theme('colors.secondary');
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes glowFlash {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            30% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(2.5);
+            }
+        }
+
+        .glow-flash {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(233,195,73,0.9) 0%, rgba(233,195,73,0.3) 40%, rgba(233,195,73,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 15;
+            mix-blend-mode: screen;
+        }
+
+        /* Custom Scrollbar for Carousel */
+        .carousel-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .carousel-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .carousel-item {
+            scroll-snap-align: center;
+        }
+        
+        .nav-glow:hover {
+            text-shadow: 0 0 15px rgba(233, 195, 73, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col relative">
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 transition-opacity duration-700 ease-in-out">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-6">
+<!-- Navigation Links (Hidden on mobile) -->
+<nav class="hidden md:flex gap-8">
+<a class="font-body-md text-body-md tracking-widest text-secondary border-b border-secondary pb-1 nav-glow" href="#">Collections</a>
+<a class="font-body-md text-body-md tracking-widest text-on-surface hover:text-secondary transition-colors duration-500 nav-glow" href="#">Bespoke</a>
+<a class="font-body-md text-body-md tracking-widest text-on-surface hover:text-secondary transition-colors duration-500 nav-glow" href="#">Heritage</a>
+<a class="font-body-md text-body-md tracking-widest text-on-surface hover:text-secondary transition-colors duration-500 nav-glow" href="#">Concierge</a>
+</nav>
+<!-- Brand Logo -->
+<a class="font-headline-md text-headline-md text-secondary tracking-[0.2em] uppercase absolute left-1/2 transform -translate-x-1/2" href="#">
+                VANTIS
+            </a>
+<!-- Trailing Icons -->
+<div class="flex gap-4">
+<button class="text-on-surface hover:text-secondary transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+<button class="text-on-surface hover:text-secondary transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Shared Component - Visible on Web) -->
+<aside class="hidden md:flex flex-col h-full py-8 justify-between fixed left-0 top-0 h-screen w-20 hover:w-64 transition-all duration-500 z-40 bg-surface-container-lowest dark:bg-surface-container-lowest border-r border-secondary/10 shadow-[5px_0px_30px_rgba(233,195,73,0.05)] group pt-24 overflow-hidden">
+<div class="flex flex-col gap-8 w-full px-4">
+<div class="flex items-center gap-4 text-on-surface-variant group-hover:text-on-surface transition-colors">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden flex-shrink-0 border border-secondary/20">
+<img alt="Vantis Private Member" class="w-full h-full object-cover" data-alt="A sophisticated black and white portrait of a man, conveying an aura of exclusivity and luxury, appropriate for a high-net-worth individual avatar. The lighting is dramatic and cinematic, fitting a dark mode premium aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtyBCInUiusMLaYJXYKyb_qat6_z-e3wEbjZR2suvt8awE9dFQv4QiJ4_QgwOB5a2rVaiJznMofKCqm-_MFy_ESrKe-l0wb7HichDuKTi_U5VY3o1f4eNAAXF6A2b01Y3oBiL2foh2BsSTOdO-bknOQUquVObprGccoksKugDHs8X7XhyXVopXmNlKoNZNs6YgsJNQY583ukv-zRygA-R1KbJ-l_fJx_W-_MPiP8CyiulCJ2t-WZqWZFnjcsW0lkeuoZDIaBbNsfw"/>
+</div>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-40 whitespace-nowrap">
+<div class="font-label-caps text-label-caps text-secondary">VANTIS</div>
+<div class="text-xs text-on-surface-variant truncate">The Obsidian Collection</div>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-8 w-full">
+<a class="flex items-center gap-4 p-3 rounded-lg text-secondary bg-secondary/5 border-r-2 border-secondary group-hover:translate-x-1 duration-300 w-full relative" href="#">
+<span class="material-symbols-outlined flex-shrink-0" data-icon="watch">watch</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-14 whitespace-nowrap">Watches</span>
+</a>
+<a class="flex items-center gap-4 p-3 rounded-lg text-on-surface-variant hover:text-secondary hover:bg-surface-container-high transition-all group-hover:translate-x-1 duration-300 w-full relative" href="#">
+<span class="material-symbols-outlined flex-shrink-0" data-icon="water_drop">water_drop</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-14 whitespace-nowrap">Perfumes</span>
+</a>
+<a class="flex items-center gap-4 p-3 rounded-lg text-on-surface-variant hover:text-secondary hover:bg-surface-container-high transition-all group-hover:translate-x-1 duration-300 w-full relative" href="#">
+<span class="material-symbols-outlined flex-shrink-0" data-icon="diamond">diamond</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-14 whitespace-nowrap">Jewelry</span>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4 w-full px-4 mb-8">
+<button class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-label-caps text-label-caps text-secondary border border-secondary/30 py-3 px-4 rounded hover:bg-secondary/10 whitespace-nowrap">
+                Request Private Viewing
+            </button>
+<div class="flex flex-col gap-2 w-full mt-4 border-t border-outline-variant/20 pt-4">
+<a class="flex items-center gap-4 p-2 text-on-surface-variant hover:text-secondary transition-all w-full relative" href="#">
+<span class="material-symbols-outlined flex-shrink-0 text-sm" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-10 whitespace-nowrap text-[10px]">Settings</span>
+</a>
+<a class="flex items-center gap-4 p-2 text-on-surface-variant hover:text-secondary transition-all w-full relative" href="#">
+<span class="material-symbols-outlined flex-shrink-0 text-sm" data-icon="contact_support">contact_support</span>
+<span class="font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-10 whitespace-nowrap text-[10px]">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-grow pt-32 pb-24 md:ml-20 flex flex-col relative overflow-hidden min-h-screen">
+<!-- Back Button -->
+<div class="absolute top-32 left-8 md:left-12 z-20">
+<a class="group flex items-center gap-2 text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined text-sm transition-transform group-hover:-translate-x-1" data-icon="arrow_back">arrow_back</span>
+<span class="font-label-caps text-label-caps uppercase tracking-widest border-b border-transparent group-hover:border-secondary transition-all">Back to Collections</span>
+</a>
+</div>
+<!-- Section Title -->
+<div class="text-center w-full px-4 mb-12 mt-16 md:mt-8 z-10">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-secondary mb-4 drop-shadow-[0_0_15px_rgba(233,195,73,0.1)]">Horology</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">A curation of timepieces that defy the mundane, forged in the fires of precision and aesthetic supremacy.</p>
+</div>
+<!-- Carousel Container -->
+<div class="relative w-full flex-grow flex items-center justify-center overflow-hidden">
+<!-- Background Ambient Glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[614px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="flex w-full overflow-x-auto carousel-scroll px-[10vw] md:px-[25vw] py-12 gap-8 md:gap-16 items-center" id="watch-carousel">
+<!-- Watch 1: The Aethelgard -->
+<div class="carousel-item flex-shrink-0 w-[80vw] md:w-[45vw] lg:w-[35vw] flex flex-col items-center group relative cursor-pointer" onclick="triggerExplosion(this)">
+<div class="relative w-full aspect-[3/4] mb-8 rounded-lg overflow-hidden border border-surface-container-high group-hover:border-secondary transition-colors duration-500 shadow-2xl">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10"></div>
+<img alt="The Aethelgard" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105" data-alt="A highly detailed close-up of a sophisticated mechanical luxury watch against a stark black background. The watch features intricate metallic gears, a dark face, and subtle gold accents that catch dramatic, cinematic lighting. The image embodies a premium, high-contrast dark mode aesthetic suitable for a luxury brand showcase." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB6zDx4luAt5w-Ewy4IhtKr6iEMHET9na-1rWBhrQHNlwZro-rmOrhRgLorD0tdh_9oIN1JPEqf0qVuq7CwEFSweGXcPOK6d6DeoFkTKA8VxKObcO8DoQpy9ed_ZPe-OwE6qrBZ3-d1EKQ9EZfqP9SdIzRlIEDO-hqbehH7THp-gV3xNQUuSeVPJoao8gFlct3tDuN7GXsVJVBdHooWL7aFO_lU1jbTLZHMvK3a-fOQiLHXc0ogEG83qXc0NHDzUXXA88v2gAKSuA"/>
+<div class="particle-container"></div>
+</div>
+<div class="text-center z-20">
+<h2 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-2 group-hover:text-secondary transition-colors duration-300">The Aethelgard</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em]">Masterpiece Collection</p>
+</div>
+</div>
+<!-- Watch 2: Obsidian Chronograph -->
+<div class="carousel-item flex-shrink-0 w-[80vw] md:w-[45vw] lg:w-[35vw] flex flex-col items-center group relative cursor-pointer" onclick="triggerExplosion(this)">
+<div class="relative w-full aspect-[3/4] mb-8 rounded-lg overflow-hidden border border-surface-container-high group-hover:border-secondary transition-colors duration-500 shadow-2xl">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10"></div>
+<img alt="Obsidian Chronograph" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105" data-alt="A sleek, modern luxury chronograph watch presented in a minimalist, shadowy environment. The watch is predominantly black metal with striking, luminescent gold details. Lighting is focused strictly on the watch face, leaving the background in deep obsidian shadow to highlight the product's exclusivity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCf4KBEnukeleUKGmOAxIwt9ZEsRKDeLvc8ytOT-k6Pxt9duA2SKjWdeO4mKNy8Qyw9Xf7P0jh0fs7vQf5mH8Ww7ZilixqdI78hoD8bWEY83qApxNzZmbF4LBg1SJklx-rDCvjMj8fav6PG3jEkViRof0ycYV4I80OtzWUpDWtKK38GaOcSO-G5vkF9CMVDzg9oZNSMpceFbTlZ3YKQGEeEk1T6rHm24soAXLk7g4rHxgR11qjQZbOLqMxXnq6N3vG1pZXWCVELRV4"/>
+<div class="particle-container"></div>
+</div>
+<div class="text-center z-20">
+<h2 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-2 group-hover:text-secondary transition-colors duration-300">Obsidian Chrono</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em]">Performance Series</p>
+</div>
+</div>
+<!-- Watch 3: Celestial Tourbillon -->
+<div class="carousel-item flex-shrink-0 w-[80vw] md:w-[45vw] lg:w-[35vw] flex flex-col items-center group relative cursor-pointer" onclick="triggerExplosion(this)">
+<div class="relative w-full aspect-[3/4] mb-8 rounded-lg overflow-hidden border border-surface-container-high group-hover:border-secondary transition-colors duration-500 shadow-2xl">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10"></div>
+<img alt="Celestial Tourbillon" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105" data-alt="An exquisite tourbillon watch displayed elegantly against a dark, moody backdrop. The complex exposed mechanics of the watch face are illuminated by a soft, warm rim light, emphasizing the craftsmanship. The overall mood is silent confidence and extreme precision, fitting a high-net-worth gallery presentation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2hJwK3u7zGjj-hfIZBYFl4ImbpbVZUKbH6ZvO4xDNEAx3Ej0Q2P_dyRsisj-6SLBdoCzN_3TRaWSDx2gUQo1WRBntEKSOI6s_vNoPR6hc__xfHjOH-xm8Zb4XKDQHI3Zu6l_RPSKlDSwydK1eK1juwS5AYhCQ2Fs1vsjG8_zDTABTFeG9_clfivS4hrrzeS3vP7p0GStcE1rbVoDvPNoQvuW2OMf4gNHZb85-QKv8t7wfCe0ajLeTT4AnG5IK-_OjLPijHgRg6Lc"/>
+<div class="particle-container"></div>
+</div>
+<div class="text-center z-20">
+<h2 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-2 group-hover:text-secondary transition-colors duration-300">Celestial Tourbillon</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em]">Heritage Line</p>
+</div>
+</div>
+<!-- Watch 4: Midnight Diver -->
+<div class="carousel-item flex-shrink-0 w-[80vw] md:w-[45vw] lg:w-[35vw] flex flex-col items-center group relative cursor-pointer" onclick="triggerExplosion(this)">
+<div class="relative w-full aspect-[3/4] mb-8 rounded-lg overflow-hidden border border-surface-container-high group-hover:border-secondary transition-colors duration-500 shadow-2xl">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10"></div>
+<img alt="Midnight Diver" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105" data-alt="A robust yet elegant dive watch set against a pitch-black background with subtle reflections suggesting deep water. The watch features a dark ceramic bezel and bold, glowing indices. The lighting is dramatic and directional, creating a sense of mystery and high-end durability inherent to luxury sports watches." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXVETBMwqo7tYu_3n7Dzio2miM3fH2GWWmuCaJWRtcbW974VxRZYdQQQOr12QL3WAdAhD1JJDTiK0UQf5rTgmGMH1uTCQxxQgnJedhKxoViP2uYg0DASXq2XqBk6g-nwMhj58RbEerbms6czQEpQKiPpCcUvPSH5DmUqH8MNv4GVRvYTCltorZrygr5aT5OJpKSz5jCexW0fLQ14R8jnzlYpfIi3kgpmesHmt8E9ap9A95_wdj6XwVkEmRLELt9oOZVl38oJdLOc8"/>
+<div class="particle-container"></div>
+</div>
+<div class="text-center z-20">
+<h2 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-2 group-hover:text-secondary transition-colors duration-300">Midnight Diver</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em]">Expedition Series</p>
+</div>
+</div>
+<!-- Watch 5: Heritage Gold -->
+<div class="carousel-item flex-shrink-0 w-[80vw] md:w-[45vw] lg:w-[35vw] flex flex-col items-center group relative cursor-pointer" onclick="triggerExplosion(this)">
+<div class="relative w-full aspect-[3/4] mb-8 rounded-lg overflow-hidden border border-surface-container-high group-hover:border-secondary transition-colors duration-500 shadow-2xl">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent z-10"></div>
+<img alt="Heritage Gold" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105" data-alt="A classic gold luxury watch with a leather strap against a dark background, embodying timeless elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9AEQCopP7tvZ0Fxi0ceC80SzSpjjA4cIec5S4RQWk3yHwUDNOllEaZoLr9rK_fmBsMdirArOnLSUJbU4GCDrDj-YY3TZeqpCRY4lXPIwGAIJytpKeLzSlgIuVzI90GsAtaTWpaICaTZHD_uvtVZ48rThuL2o9nJCZ5rxXOHUfTtfXbVb0EOyCpGBqr4wvF4CHEV31ISFaNEUB-PMI4n9XcrqOFtSbrx-tZgpmsukE_jSwUWdwEWmV-gGn7zkOvxbsncCbspE9LKM"/>
+<div class="particle-container"></div>
+</div>
+<div class="text-center z-20">
+<h2 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-2 group-hover:text-secondary transition-colors duration-300">Heritage Gold</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em]">Classic Series</p>
+</div>
+</div>
+</div>
+<!-- Carousel Controls (Visual cues) -->
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-4 z-20">
+<div class="w-12 h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="w-1/5 h-full bg-secondary"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full py-12 bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/20 flex flex-col items-center justify-center gap-6 px-margin-desktop md:ml-20">
+<div class="font-headline-md text-headline-md text-secondary">VANTIS</div>
+<div class="flex gap-8">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline-offset-8 transition-all duration-500" href="#">Privacy Policy</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline-offset-8 transition-all duration-500" href="#">Terms of Service</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline-offset-8 transition-all duration-500" href="#">Shipping &amp; Returns</a>
+</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mt-4">
+            © 2024 VANTIS LUXURY. ALL RIGHTS RESERVED.
+        </div>
+</footer>
+<script>
+        // Explosion Effect Logic
+        function triggerExplosion(element) {
+            const container = element.querySelector('.particle-container');
+            if (!container) return;
+
+            // Clear previous particles and flashes
+            container.innerHTML = '';
+
+            // Create Glow Flash
+            const flash = document.createElement('div');
+            flash.classList.add('glow-flash');
+            flash.style.animation = 'glowFlash 0.7s ease-out forwards';
+            container.appendChild(flash);
+            
+            setTimeout(() => {
+                if (flash.parentNode) flash.remove();
+            }, 700);
+
+            // Create High-Fidelity Particles
+            const numParticles = 60;
+            const colors = ['#e9c349', '#ffe088', '#ffffff', '#ffb4ab'];
+
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Randomize properties for more organic feel
+                const size = Math.random() * 6 + 2; // 2px to 8px
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 60 + Math.random() * 220; // 60px to 280px distance
+                
+                const tx = Math.cos(angle) * velocity + 'px';
+                const ty = Math.sin(angle) * velocity + 'px';
+                
+                const duration = 0.5 + Math.random() * 0.7; // 0.5s to 1.2s
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.backgroundColor = color;
+                particle.style.boxShadow = `0 0 ${size * 2}px ${color}`;
+                particle.style.setProperty('--tx', tx);
+                particle.style.setProperty('--ty', ty);
+                particle.style.animation = `explode ${duration}s cubic-bezier(0.1, 0.8, 0.2, 1) forwards`;
+
+                container.appendChild(particle);
+                
+                // Clean up particle after animation
+                setTimeout(() => {
+                    if (particle.parentNode) particle.remove();
+                }, duration * 1000);
+            }
+        }
+
+        // Trigger effect on scroll snapping using IntersectionObserver
+        const carousel = document.getElementById('watch-carousel');
+        const items = document.querySelectorAll('.carousel-item');
+        let activeItem = null;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.7) {
+                    if (activeItem !== entry.target) {
+                        activeItem = entry.target;
+                        // Slight delay to ensure centering before explosion
+                        setTimeout(() => {
+                            if (activeItem === entry.target) {
+                                triggerExplosion(entry.target);
+                            }
+                        }, 200);
+                    }
+                }
+            });
+        }, {
+            root: carousel,
+            threshold: 0.7 // Trigger when largely visible and centered
+        });
+
+        items.forEach(item => observer.observe(item));
+
+    </script>
+</body></html>
